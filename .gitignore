@@ -45,9 +45,30 @@ app.*.map.json
 /android/app/release
 
 # Ignoring all the generated files
-android/
-ios/
 linux/
 macos/
 web/
 windows/
+
+# Ignore IOS auto generated files
+**/ios/Flutter/.last_build_id
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/App.framework
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/ServiceDefinitions.json
+ios/Runner/GeneratedPluginRegistrant.*
+
+# Ignore android auto generated files
+android/.gradle/
+android/app/release/
+android/app/profile/
+android/app/debug/
+android/local.properties
+android/key.jks
+
+# Build outputs (general)
+*.lock
+*.tmp
+*.log
