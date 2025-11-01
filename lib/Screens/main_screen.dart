@@ -1,3 +1,4 @@
+import 'package:cred_assignment_by_shubham_puhal/Widgets/bills_section_carousal.dart';
 import 'package:cred_assignment_by_shubham_puhal/Widgets/custom_text.dart';
 import 'package:cred_assignment_by_shubham_puhal/Widgets/main_screen_appbar.dart';
 import 'package:flutter/material.dart';
@@ -20,14 +21,14 @@ class _MainScreenState extends State<MainScreen> {
     height = dimensions.height;
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color.fromARGB(255, 245, 245, 245),
       appBar: CustomAppBar(title: "Swipable Vertical Carousal"),
 
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(width: 100, height: 100, color: Colors.red),
+          BillsSectionCarousal(),
           CustomText(text: "Button"),
         ],
       ),
