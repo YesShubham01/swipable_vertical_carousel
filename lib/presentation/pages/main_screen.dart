@@ -1,6 +1,6 @@
-import 'package:cred_assignment_by_shubham_puhal/Widgets/bills_section_carousal.dart';
-import 'package:cred_assignment_by_shubham_puhal/Widgets/custom_text.dart';
-import 'package:cred_assignment_by_shubham_puhal/Widgets/main_screen_appbar.dart';
+import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/bills_section_carousal.dart';
+import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/custom_text.dart';
+import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/main_screen_appbar.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {

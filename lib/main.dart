@@ -1,4 +1,4 @@
-import 'package:cred_assignment_by_shubham_puhal/Screens/main_screen.dart';
+import 'package:cred_assignment_by_shubham_puhal/presentation/pages/main_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
