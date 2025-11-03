@@ -38,7 +38,20 @@ class _HomeScreenState extends State<HomeScreen> {
           // CustomText(text: "Button"),
           SwipableVerticalCarousel(
             key: _carouselKey,
-            widgets: [_card(), _card(), _card(), _card(), _card(), _card()],
+            widgets: [
+              _card(),
+              _card(),
+              _card(),
+              _card(),
+              _card(),
+              _card(),
+              _card(),
+              _card(),
+              _card(),
+              _card(),
+              _card(),
+              _card(),
+            ],
           ),
           Gap(20),
           // SizedBox(
@@ -53,7 +66,15 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: () {
               _carouselKey.currentState?.swipeUp();
             },
-            child: CustomText(text: "SwipeUp"),
+            child: CustomText(text: "Swipe Up"),
+          ),
+
+          Gap(20),
+          ElevatedButton(
+            onPressed: () {
+              _carouselKey.currentState?.swipeDown();
+            },
+            child: CustomText(text: "Swipe Down"),
           ),
         ],
       ),
