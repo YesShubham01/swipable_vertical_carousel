@@ -1,5 +1,5 @@
 import 'package:cred_assignment_by_shubham_puhal/core/controllers/swipable_carousel_controller.dart';
-import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/bill_section_card.dart';
+import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/bills_section_widgets/bill_section_card.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 
@@ -11,21 +11,21 @@ class CardModel {
   CardModel({required this.id, this.zIndex = 0.0, this.child});
 }
 
-class SwipableVerticalCarousal extends StatefulWidget {
+class SwipableVerticalCarousel extends StatefulWidget {
   final List<Widget> widgets;
   final SwipableCarouselController? controller;
-  const SwipableVerticalCarousal({
+  const SwipableVerticalCarousel({
     super.key,
     required this.widgets,
     this.controller,
   });
 
   @override
-  State<SwipableVerticalCarousal> createState() =>
+  State<SwipableVerticalCarousel> createState() =>
       SwipableVerticalCarousalState();
 }
 
-class SwipableVerticalCarousalState extends State<SwipableVerticalCarousal> {
+class SwipableVerticalCarousalState extends State<SwipableVerticalCarousel> {
   late double height; // height of the screen
   late double width; // width of the screen
 

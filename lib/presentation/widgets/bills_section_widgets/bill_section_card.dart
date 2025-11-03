@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class BillSectionCard extends StatefulWidget {
-  bool showShadows;
-  BillSectionCard({super.key, this.showShadows = true});
+  final bool showShadows;
+  const BillSectionCard({super.key, this.showShadows = true});
 
   @override
   State<BillSectionCard> createState() => _BillSectionCardState();
@@ -26,7 +26,7 @@ class _BillSectionCardState extends State<BillSectionCard> {
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border.all(color: const Color.fromARGB(255, 201, 200, 200)),
-        borderRadius: BorderRadius.all(Radius.circular(5)),
+        borderRadius: const BorderRadius.all(Radius.circular(5)),
         boxShadow: widget.showShadows
             ? [
                 BoxShadow(
@@ -48,9 +48,9 @@ class _BillSectionCardState extends State<BillSectionCard> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Icon(Icons.cake, size: 40),
-            Gap(15),
-            Column(
+            const Icon(Icons.cake, size: 40),
+            const Gap(15),
+            const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -80,8 +80,8 @@ class _BillSectionCardState extends State<BillSectionCard> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         _outLineButton(),
-        Gap(5),
-        CustomText(
+        const Gap(5),
+        const CustomText(
           text: "AUTOPAY IN 3 DAYS",
           size: 10,
           color: const Color.fromARGB(255, 57, 177, 123),
@@ -98,7 +98,7 @@ class _BillSectionCardState extends State<BillSectionCard> {
         border: Border.all(color: Colors.black, width: 1.3),
         borderRadius: BorderRadius.all(Radius.circular(5)),
       ),
-      child: Row(
+      child: const Row(
         children: [
           Icon(
             Icons.ac_unit_rounded,
