@@ -4,32 +4,36 @@ import 'package:cred_assignment_by_shubham_puhal/data/models/section_model.dart'
 void main() {
   test('SectionModel.fromJson maps all fields correctly', () {
     final Map<String, dynamic> mockJson = {
-      "entityType": "bills",
-      "externalId": "1",
-      "templateName": "bills_section",
-      "templateProperties": {
+      "entity_type": "bills",
+      "external_id": "1",
+      "template_name": "bills_section",
+      "template_properties": {
         "body": {
-          "autoScrollEnabled": false,
+          "auto_scroll_enabled": false,
           "badge": {
             "cta": {
               "primary": {
-                "backgroundColor": "#fff",
+                "background_color": "#fff",
                 "title": "Pay",
                 "type": "action",
               },
             },
             "icon": "icon_url",
           },
-          "billsCount": "3",
-          "cardsAnimationConfig": {"count": 3, "delay": 1, "duration": "200ms"},
+          "bills_count": "3",
+          "cards_animation_config": {
+            "count": 3,
+            "delay": 1,
+            "duration": "200ms",
+          },
           "orientation": "horizontal",
-          "templateType": "bills",
+          "template_type": "bills",
           "title": "Your Bills",
         },
-        "childList": [],
+        "child_list": [],
         "ctas": {
           "primary": {
-            "backgroundColor": "#fff",
+            "background_color": "#fff",
             "title": "Pay Now",
             "type": "action",
           },
@@ -39,32 +43,33 @@ void main() {
 
     final model = SectionModel.fromJson(mockJson);
 
-    // Verify Top-level fields
+    // Verify top-level fields
     expect(model.entityType, 'bills');
     expect(model.externalId, '1');
     expect(model.templateName, 'bills_section');
 
-    // Verify Body properties
+    // Verify body fields
     final body = model.templateProperties.body;
     expect(body.title, 'Your Bills');
     expect(body.autoScrollEnabled, false);
     expect(body.orientation, 'horizontal');
     expect(body.templateType, 'bills');
-    expect(body.billsCount, '3');
+    expect(body.billsCount, "3");
 
-    // Verify Badge & CTA
+    // Verify badge
     expect(body.badge.icon, 'icon_url');
     expect(body.badge.cta.primary?.title, 'Pay');
     expect(body.badge.cta.primary?.backgroundColor, '#fff');
     expect(body.badge.cta.primary?.type, 'action');
 
-    // Verify Cards animation config
+    // Verify animation config
     expect(body.cardsAnimationConfig.count, 3);
     expect(body.cardsAnimationConfig.delay, 1);
     expect(body.cardsAnimationConfig.duration, '200ms');
 
-    // Verify Section-level CTA
+    // Verify CTAs
     expect(model.templateProperties.ctas.primary?.title, 'Pay Now');
     expect(model.templateProperties.ctas.primary?.type, 'action');
+    expect(model.templateProperties.ctas.primary?.backgroundColor, '#fff');
   });
 }

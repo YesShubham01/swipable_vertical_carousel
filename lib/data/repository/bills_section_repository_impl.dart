@@ -3,7 +3,7 @@ import 'package:cred_assignment_by_shubham_puhal/data/models/section_model.dart'
 
 /// Abstract contract for the repository
 abstract class BillsSectionRepository {
-  Future<List<SectionModel>> getBillsSection();
+  Future<SectionModel> getBillsSection();
 }
 
 /// Implementation of [BillsSectionRepository].
@@ -13,16 +13,14 @@ class BillsSectionRepositoryImpl implements BillsSectionRepository {
   BillsSectionRepositoryImpl({required this.remoteDataSource});
 
   @override
-  Future<List<SectionModel>> getBillsSection() async {
+  Future<SectionModel> getBillsSection() async {
     try {
-      final sectionJsonList = await remoteDataSource.fetchBillsSection();
+      final sectionJson = await remoteDataSource.fetchBillsSection();
 
       // Convert JSON list to list of SectionModel
-      final sections = sectionJsonList
-          .map((json) => SectionModel.fromJson(json))
-          .toList();
+      final sectionData = SectionModel.fromJson(sectionJson);
 
-      return sections;
+      return sectionData;
     } catch (e) {
       // Optionally handle specific exceptions like network errors
       throw Exception('Failed to load bills section: $e');

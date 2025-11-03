@@ -22,60 +22,55 @@ void main() {
     test(
       'should return a list of SectionModel when data source returns valid JSON',
       () async {
-        final mockJsonList = [
-          {
-            "entityType": "bills",
-            "externalId": "1",
-            "templateName": "bills_section",
-            "templateProperties": {
-              "body": {
-                "autoScrollEnabled": false,
-                "badge": {
-                  "cta": {
-                    "primary": {
-                      "backgroundColor": "#fff",
-                      "title": "Pay",
-                      "type": "action",
-                    },
+        final Map<String, dynamic> mockJsonList = {
+          "entity_type": "bills",
+          "external_id": "1",
+          "template_name": "bills_section",
+          "template_properties": {
+            "body": {
+              "auto_scroll_enabled": false,
+              "badge": {
+                "cta": {
+                  "primary": {
+                    "background_color": "#fff",
+                    "title": "Pay",
+                    "type": "action",
                   },
-                  "icon": "icon_url",
                 },
-                "billsCount": "3",
-                "cardsAnimationConfig": {
-                  "count": 3,
-                  "delay": 1,
-                  "duration": "200ms",
-                },
-                "orientation": "horizontal",
-                "templateType": "bills",
-                "title": "Your Bills",
+                "icon": "icon_url",
               },
-              "childList": [],
-              "ctas": {
-                "primary": {
-                  "backgroundColor": "#fff",
-                  "title": "Pay Now",
-                  "type": "action",
-                },
+              "bills_count": "3",
+              "cards_animation_config": {
+                "count": 3,
+                "delay": 1,
+                "duration": "200ms",
+              },
+              "orientation": "horizontal",
+              "template_type": "bills",
+              "title": "Your Bills",
+            },
+            "child_list": [],
+            "ctas": {
+              "primary": {
+                "background_color": "#fff",
+                "title": "Pay Now",
+                "type": "action",
               },
             },
           },
-        ];
-        
+        };
+
         when(
           mockDataSource.fetchBillsSection(),
         ).thenAnswer((_) async => mockJsonList);
 
         final result = await repository.getBillsSection();
 
-        expect(result, isA<List<SectionModel>>());
-        expect(result.first.entityType, 'bills');
+        expect(result, isA<SectionModel>());
+        expect(result.entityType, 'bills');
         // deep level checks to ensure that json is correctly getting converted to models at all levels.
-        expect(
-          result[0].templateProperties.body.badge.cta.primary?.title,
-          "Pay",
-        );
-        expect(result[0].templateProperties.ctas.primary?.title, "Pay Now");
+        expect(result.templateProperties.body.badge.cta.primary?.title, "Pay");
+        expect(result.templateProperties.ctas.primary?.title, "Pay Now");
 
         verify(mockDataSource.fetchBillsSection()).called(1);
       },

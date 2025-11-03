@@ -2,7 +2,8 @@ import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/custom_tex
 import 'package:flutter/material.dart';
 
 class BillSectionHeader extends StatefulWidget {
-  const BillSectionHeader({super.key});
+  final String? title;
+  const BillSectionHeader({super.key, this.title});
 
   @override
   State<BillSectionHeader> createState() => _BillSectionHeaderState();
@@ -11,22 +12,22 @@ class BillSectionHeader extends StatefulWidget {
 class _BillSectionHeaderState extends State<BillSectionHeader> {
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       children: [
         CustomText(
-          text: "UPCOMING BILLS (9)",
+          text: widget.title ?? "UPCOMING BILLS (9)",
           size: 18,
           weight: FontWeight.bold,
           color: Colors.black54,
         ),
-        Spacer(),
-        CustomText(
+        const Spacer(),
+        const CustomText(
           text: "view all",
           size: 18,
           weight: FontWeight.bold,
           color: Colors.black54,
         ),
-        Icon(Icons.navigate_next_rounded),
+        const Icon(Icons.navigate_next_rounded),
       ],
     );
   }

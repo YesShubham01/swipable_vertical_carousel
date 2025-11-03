@@ -13,19 +13,19 @@ class SectionModel {
   });
 
   factory SectionModel.fromJson(Map<String, dynamic> json) => SectionModel(
-    entityType: json['entityType'],
-    externalId: json['externalId'],
-    templateName: json['templateName'],
+    entityType: json['entity_type'] ?? '',
+    externalId: json['external_id'] ?? '',
+    templateName: json['template_name'] ?? '',
     templateProperties: SectionTemplatePropertiesModel.fromJson(
-      json['templateProperties'],
+      json['template_properties'] ?? {},
     ),
   );
 
   Map<String, dynamic> toJson() => {
-    'entityType': entityType,
-    'externalId': externalId,
-    'templateName': templateName,
-    'templateProperties': templateProperties.toJson(),
+    'entity_type': entityType,
+    'external_id': externalId,
+    'template_name': templateName,
+    'template_properties': templateProperties.toJson(),
   };
 }
 
@@ -42,16 +42,18 @@ class SectionTemplatePropertiesModel {
 
   factory SectionTemplatePropertiesModel.fromJson(Map<String, dynamic> json) =>
       SectionTemplatePropertiesModel(
-        body: SectionBodyModel.fromJson(json['body']),
-        childList: (json['childList'] as List<dynamic>)
+        body: SectionBodyModel.fromJson(json['body'] ?? {}),
+        childList: (json['child_list'] as List<dynamic>? ?? [])
             .map((e) => SectionChildModel.fromJson(e))
             .toList(),
-        ctas: CallToActionModel.fromJson(json['ctas']),
+        ctas: json['ctas'] != null
+            ? CallToActionModel.fromJson(json['ctas'])
+            : const CallToActionModel(),
       );
 
   Map<String, dynamic> toJson() => {
     'body': body.toJson(),
-    'childList': childList.map((e) => e.toJson()).toList(),
+    'child_list': childList.map((e) => e.toJson()).toList(),
     'ctas': ctas.toJson(),
   };
 }
@@ -77,24 +79,26 @@ class SectionBodyModel {
 
   factory SectionBodyModel.fromJson(Map<String, dynamic> json) =>
       SectionBodyModel(
-        autoScrollEnabled: json['autoScrollEnabled'],
-        badge: BadgeModel.fromJson(json['badge']),
-        billsCount: json['billsCount'],
+        autoScrollEnabled: json['auto_scroll_enabled'] ?? false,
+        badge: json['badge'] != null
+            ? BadgeModel.fromJson(json['badge'])
+            : const BadgeModel(cta: CallToActionModel(), icon: ''),
+        billsCount: json['bills_count']?.toString() ?? '',
         cardsAnimationConfig: CardsAnimationConfigModel.fromJson(
-          json['cardsAnimationConfig'],
+          json['cards_animation_config'] ?? {},
         ),
-        orientation: json['orientation'],
-        templateType: json['templateType'],
-        title: json['title'],
+        orientation: json['orientation'] ?? '',
+        templateType: json['template_type'] ?? '',
+        title: json['title'] ?? '',
       );
 
   Map<String, dynamic> toJson() => {
-    'autoScrollEnabled': autoScrollEnabled,
+    'auto_scroll_enabled': autoScrollEnabled,
     'badge': badge.toJson(),
-    'billsCount': billsCount,
-    'cardsAnimationConfig': cardsAnimationConfig.toJson(),
+    'bills_count': billsCount,
+    'cards_animation_config': cardsAnimationConfig.toJson(),
     'orientation': orientation,
-    'templateType': templateType,
+    'template_type': templateType,
     'title': title,
   };
 }
@@ -106,8 +110,8 @@ class BadgeModel {
   const BadgeModel({required this.cta, required this.icon});
 
   factory BadgeModel.fromJson(Map<String, dynamic> json) => BadgeModel(
-    cta: CallToActionModel.fromJson(json['cta']),
-    icon: json['icon'],
+    cta: CallToActionModel.fromJson(json['cta'] ?? {}),
+    icon: json['icon'] ?? '',
   );
 
   Map<String, dynamic> toJson() => {'cta': cta.toJson(), 'icon': icon};
@@ -126,9 +130,9 @@ class CardsAnimationConfigModel {
 
   factory CardsAnimationConfigModel.fromJson(Map<String, dynamic> json) =>
       CardsAnimationConfigModel(
-        count: json['count'],
-        delay: json['delay'],
-        duration: json['duration'],
+        count: json['count'] ?? 0,
+        delay: json['delay'] ?? 0,
+        duration: json['duration'] ?? '',
       );
 
   Map<String, dynamic> toJson() => {
@@ -153,19 +157,19 @@ class SectionChildModel {
 
   factory SectionChildModel.fromJson(Map<String, dynamic> json) =>
       SectionChildModel(
-        entityType: json['entityType'],
-        externalId: json['externalId'],
-        templateName: json['templateName'],
+        entityType: json['entity_type'] ?? '',
+        externalId: json['external_id'] ?? '',
+        templateName: json['template_name'] ?? '',
         templateProperties: SectionChildTemplatePropertiesModel.fromJson(
-          json['templateProperties'],
+          json['template_properties'] ?? {},
         ),
       );
 
   Map<String, dynamic> toJson() => {
-    'entityType': entityType,
-    'externalId': externalId,
-    'templateName': templateName,
-    'templateProperties': templateProperties.toJson(),
+    'entity_type': entityType,
+    'external_id': externalId,
+    'template_name': templateName,
+    'template_properties': templateProperties.toJson(),
   };
 }
 
@@ -183,9 +187,9 @@ class SectionChildTemplatePropertiesModel {
   factory SectionChildTemplatePropertiesModel.fromJson(
     Map<String, dynamic> json,
   ) => SectionChildTemplatePropertiesModel(
-    background: Background.fromJson(json['background']),
-    body: SectionChildBody.fromJson(json['body']),
-    ctas: CallToActionModel.fromJson(json['ctas']),
+    background: Background.fromJson(json['background'] ?? {}),
+    body: SectionChildBody.fromJson(json['body'] ?? {}),
+    ctas: CallToActionModel.fromJson(json['ctas'] ?? {}),
   );
 
   Map<String, dynamic> toJson() => {
@@ -203,7 +207,7 @@ class Background {
 
   factory Background.fromJson(Map<String, dynamic> json) => Background(
     asset: json['asset'] != null ? Asset.fromJson(json['asset']) : null,
-    color: GradientColor.fromJson(json['color']),
+    color: GradientColor.fromJson(json['color'] ?? {}),
   );
 
   Map<String, dynamic> toJson() => {
@@ -219,7 +223,7 @@ class Asset {
   const Asset({required this.type, required this.url});
 
   factory Asset.fromJson(Map<String, dynamic> json) =>
-      Asset(type: json['type'], url: json['url']);
+      Asset(type: json['type'] ?? '', url: json['url'] ?? '');
 
   Map<String, dynamic> toJson() => {'type': type, 'url': url};
 }
@@ -231,8 +235,8 @@ class GradientColor {
   const GradientColor({required this.colors, required this.direction});
 
   factory GradientColor.fromJson(Map<String, dynamic> json) => GradientColor(
-    colors: List<String>.from(json['colors']),
-    direction: json['direction'],
+    colors: List<String>.from(json['colors'] ?? []),
+    direction: json['direction'] ?? '',
   );
 
   Map<String, dynamic> toJson() => {'colors': colors, 'direction': direction};
@@ -261,27 +265,27 @@ class SectionChildBody {
 
   factory SectionChildBody.fromJson(Map<String, dynamic> json) =>
       SectionChildBody(
-        footerText: json['footerText'],
-        logo: Logo.fromJson(json['logo']),
-        paymentAmount: json['paymentAmount'],
-        subTitle: json['subTitle'],
-        templateType: json['templateType'],
-        title: json['title'],
-        flipperConfig: json['flipperConfig'] != null
-            ? FlipperConfig.fromJson(json['flipperConfig'])
+        footerText: json['footer_text'],
+        logo: Logo.fromJson(json['logo'] ?? {}),
+        paymentAmount: json['payment_amount']?.toString() ?? '',
+        subTitle: json['sub_title'] ?? '',
+        templateType: json['template_type'] ?? '',
+        title: json['title'] ?? '',
+        flipperConfig: json['flipper_config'] != null
+            ? FlipperConfig.fromJson(json['flipper_config'])
             : null,
-        paymentTag: json['paymentTag'],
+        paymentTag: json['payment_tag'],
       );
 
   Map<String, dynamic> toJson() => {
-    'footerText': footerText,
+    'footer_text': footerText,
     'logo': logo.toJson(),
-    'paymentAmount': paymentAmount,
-    'subTitle': subTitle,
-    'templateType': templateType,
+    'payment_amount': paymentAmount,
+    'sub_title': subTitle,
+    'template_type': templateType,
     'title': title,
-    'flipperConfig': flipperConfig?.toJson(),
-    'paymentTag': paymentTag,
+    'flipper_config': flipperConfig?.toJson(),
+    'payment_tag': paymentTag,
   };
 }
 
@@ -299,18 +303,18 @@ class FlipperConfig {
   });
 
   factory FlipperConfig.fromJson(Map<String, dynamic> json) => FlipperConfig(
-    finalStage: FinalStage.fromJson(json['finalStage']),
-    flipCount: json['flipCount'],
-    flipDelay: json['flipDelay'],
-    items: (json['items'] as List<dynamic>)
+    finalStage: FinalStage.fromJson(json['final_stage'] ?? {}),
+    flipCount: json['flip_count'] ?? 0,
+    flipDelay: json['flip_delay'] ?? 0,
+    items: (json['items'] as List<dynamic>? ?? [])
         .map((e) => FinalStage.fromJson(e))
         .toList(),
   );
 
   Map<String, dynamic> toJson() => {
-    'finalStage': finalStage.toJson(),
-    'flipCount': flipCount,
-    'flipDelay': flipDelay,
+    'final_stage': finalStage.toJson(),
+    'flip_count': flipCount,
+    'flip_delay': flipDelay,
     'items': items.map((e) => e.toJson()).toList(),
   };
 }
@@ -321,7 +325,7 @@ class FinalStage {
   const FinalStage({required this.text});
 
   factory FinalStage.fromJson(Map<String, dynamic> json) =>
-      FinalStage(text: json['text']);
+      FinalStage(text: json['text'] ?? '');
 
   Map<String, dynamic> toJson() => {'text': text};
 }
@@ -333,11 +337,14 @@ class Logo {
 
   const Logo({required this.bgColor, required this.shape, required this.url});
 
-  factory Logo.fromJson(Map<String, dynamic> json) =>
-      Logo(bgColor: json['bgColor'], shape: json['shape'], url: json['url']);
+  factory Logo.fromJson(Map<String, dynamic> json) => Logo(
+    bgColor: json['bg_color'] ?? '',
+    shape: json['shape'] ?? '',
+    url: json['url'] ?? '',
+  );
 
   Map<String, dynamic> toJson() => {
-    'bgColor': bgColor,
+    'bg_color': bgColor,
     'shape': shape,
     'url': url,
   };
@@ -367,13 +374,13 @@ class CallToActionPrimary {
 
   factory CallToActionPrimary.fromJson(Map<String, dynamic> json) =>
       CallToActionPrimary(
-        backgroundColor: json['backgroundColor'],
+        backgroundColor: json['background_color'],
         title: json['title'],
         type: json['type'],
       );
 
   Map<String, dynamic> toJson() => {
-    'backgroundColor': backgroundColor,
+    'background_color': backgroundColor,
     'title': title,
     'type': type,
   };

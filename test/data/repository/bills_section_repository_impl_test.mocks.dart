@@ -34,12 +34,12 @@ class MockBillsSectionDataSource extends _i1.Mock
   }
 
   @override
-  _i3.Future<List<Map<String, dynamic>>> fetchBillsSection() =>
+  _i3.Future<Map<String, dynamic>> fetchBillsSection() =>
       (super.noSuchMethod(
             Invocation.method(#fetchBillsSection, []),
-            returnValue: _i3.Future<List<Map<String, dynamic>>>.value(
-              <Map<String, dynamic>>[],
+            returnValue: _i3.Future<Map<String, dynamic>>.value(
+              <String, dynamic>{},
             ),
           )
-          as _i3.Future<List<Map<String, dynamic>>>);
+          as _i3.Future<Map<String, dynamic>>);
 }
