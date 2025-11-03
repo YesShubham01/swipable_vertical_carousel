@@ -80,6 +80,7 @@ class ItemsWidgetState extends State<ItemsWidget> {
   int secondActiveIndex = 1;
 
   bool isSwiping = false;
+  bool isAnimating = false;
 
   @override
   Widget build(BuildContext context) {
@@ -134,10 +135,11 @@ class ItemsWidgetState extends State<ItemsWidget> {
     // sort the cards according to z-axis
     cards.sort((a, b) => b.zIndex.compareTo(a.zIndex));
 
-    // show only top 5 cards
-    final visibleCards = cards;
-    // .skip((cards.length - 5).clamp(0, cards.length))
-    // .toList();
+    // show only top 4 cards or 5 cards depending on the scroll position.
+    int visibleCardCount = (firstActiveIndex == 0) ? 4 : 5;
+    final visibleCards = cards
+        .skip((cards.length - visibleCardCount).clamp(0, cards.length))
+        .toList();
 
     // display
     return visibleCards.map((e) => _displayCarousal(e)).toList();
@@ -145,16 +147,22 @@ class ItemsWidgetState extends State<ItemsWidget> {
 
   /// display single card with it's appropriate position and animation.
   Widget _displayCarousal(CardModel card) {
+    bool showShadows =
+        !(card.id == firstActiveIndex &&
+            !isAnimating); // flag to show shadow in BillSectionCard if it's not at firstActiveIndex
     return AnimatedPositioned(
+      curve: Curves.fastOutSlowIn,
       key: ValueKey(card.id),
       duration: Duration(milliseconds: 500),
       top: calculateTopDistance(card.id),
-      child: Transform(
+      child: AnimatedContainer(
+        transformAlignment: Alignment.center,
+        duration: Duration(milliseconds: 500),
         transform: getTransform(card.id),
         alignment: FractionalOffset.center,
         child: Stack(
           children: [
-            BillSectionCard(),
+            BillSectionCard(showShadows: showShadows),
             Center(child: CustomText(text: card.id.toString())),
           ],
         ),
@@ -166,6 +174,7 @@ class ItemsWidgetState extends State<ItemsWidget> {
   void swipeUp() {
     if (isSwiping) return;
     isSwiping = true;
+    isAnimating = true;
 
     setState(() {
       if (secondActiveIndex < widget.cards.length - 1) {
@@ -180,6 +189,9 @@ class ItemsWidgetState extends State<ItemsWidget> {
     // this few second of disabling swiping prevents multiple swipes with one touch.
     Future.delayed(const Duration(milliseconds: 500), () {
       isSwiping = false;
+      setState(() {
+        isAnimating = false;
+      });
     });
   }
 
@@ -206,18 +218,18 @@ class ItemsWidgetState extends State<ItemsWidget> {
       return 0;
     } else if (index == secondActiveIndex) {
       // second visible card
-      return 120;
+      return 100;
     } else if (index < firstActiveIndex) {
       // cards that are under first card
-      // return 0;
-
-      // temporary : to understand how it's working
-      int distanceFromFirst = (index - firstActiveIndex).abs();
-      return (distanceFromFirst * -20) - 10;
+      return 10;
     } else {
       // cards which are after the second card
       int distanceFromSecond = index - secondActiveIndex;
-      return (distanceFromSecond * 20) + 120;
+      if (distanceFromSecond == 1) {
+        return (distanceFromSecond * 30) + 100;
+      } else {
+        return (distanceFromSecond * 25) + 100;
+      }
     }
   }
 
@@ -226,10 +238,15 @@ class ItemsWidgetState extends State<ItemsWidget> {
 
     if (index == firstActiveIndex || index == secondActiveIndex) {
       // keep the size same
-    } else {
-      double scaleDownFactor = 1 - ((index - secondActiveIndex) * 0.04);
+    } else if (index < firstActiveIndex) {
+      // cards that are under first card
+      double scaleDownFactor = 1 - ((index - secondActiveIndex) * 0.5);
       scaleDownFactor = scaleDownFactor.clamp(0.7, 1.0);
-      transform..scale(scaleDownFactor, scaleDownFactor, scaleDownFactor);
+      transform.scale(scaleDownFactor, scaleDownFactor, scaleDownFactor);
+    } else {
+      double scaleDownFactor = 1 - ((index - secondActiveIndex) * 0.1);
+      scaleDownFactor = scaleDownFactor.clamp(0.7, 1.0);
+      transform.scale(scaleDownFactor, scaleDownFactor, scaleDownFactor);
     }
 
     return transform;

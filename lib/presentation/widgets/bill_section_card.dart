@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class BillSectionCard extends StatefulWidget {
-  const BillSectionCard({super.key});
+  bool showShadows;
+  BillSectionCard({super.key, this.showShadows = true});
 
   @override
   State<BillSectionCard> createState() => _BillSectionCardState();
@@ -20,15 +21,29 @@ class _BillSectionCardState extends State<BillSectionCard> {
     height = dimensions.height;
 
     return Container(
-      height: 120,
-      width: width,
+      height: 100,
+      width: width * 0.9,
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border.all(color: const Color.fromARGB(255, 201, 200, 200)),
         borderRadius: BorderRadius.all(Radius.circular(5)),
+        boxShadow: widget.showShadows
+            ? [
+                BoxShadow(
+                  color: const Color.fromARGB(
+                    255,
+                    55,
+                    55,
+                    55,
+                  ).withOpacity(0.25),
+                  offset: const Offset(0, 6),
+                  blurRadius: 12,
+                ),
+              ]
+            : [],
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -37,6 +52,7 @@ class _BillSectionCardState extends State<BillSectionCard> {
             Gap(15),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CustomText(
                   text: "ICICI Bank",
@@ -61,12 +77,13 @@ class _BillSectionCardState extends State<BillSectionCard> {
 
   Widget _flippingButtonWithSubtitle() {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         _outLineButton(),
         Gap(5),
         CustomText(
           text: "AUTOPAY IN 3 DAYS",
-          size: 12,
+          size: 10,
           color: const Color.fromARGB(255, 57, 177, 123),
           weight: FontWeight.bold,
         ),
@@ -89,7 +106,7 @@ class _BillSectionCardState extends State<BillSectionCard> {
             color: const Color.fromARGB(255, 57, 177, 123),
           ),
           Gap(5),
-          CustomText(text: "₹10,000", size: 18, weight: FontWeight.bold),
+          CustomText(text: "₹10,000", size: 16, weight: FontWeight.bold),
         ],
       ),
     );
