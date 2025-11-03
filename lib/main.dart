@@ -1,4 +1,4 @@
-import 'package:cred_assignment_by_shubham_puhal/presentation/pages/main_screen.dart';
+import 'package:cred_assignment_by_shubham_puhal/presentation/pages/home_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
       ),
-      home: const MainScreen(),
+      home: const HomeScreen(),
     );
   }
 }
