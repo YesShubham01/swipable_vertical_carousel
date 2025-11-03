@@ -1,7 +1,7 @@
+import 'package:cred_assignment_by_shubham_puhal/core/controllers/swipable_carousel_controller.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/bill_section_card.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 
 class CardModel {
   final int id;
@@ -11,19 +11,23 @@ class CardModel {
   CardModel({required this.id, this.zIndex = 0.0, this.child});
 }
 
-class SwipableVerticalCarousel extends StatefulWidget {
+class SwipableVerticalCarousal extends StatefulWidget {
   final List<Widget> widgets;
-  const SwipableVerticalCarousel({super.key, required this.widgets});
+  final SwipableCarouselController? controller;
+  const SwipableVerticalCarousal({
+    super.key,
+    required this.widgets,
+    this.controller,
+  });
 
   @override
-  State<SwipableVerticalCarousel> createState() =>
-      SwipableVerticalCarouselState();
+  State<SwipableVerticalCarousal> createState() =>
+      SwipableVerticalCarousalState();
 }
 
-class SwipableVerticalCarouselState extends State<SwipableVerticalCarousel> {
+class SwipableVerticalCarousalState extends State<SwipableVerticalCarousal> {
   late double height; // height of the screen
   late double width; // width of the screen
-  final GlobalKey<ItemsWidgetState> _itemsKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -39,32 +43,23 @@ class SwipableVerticalCarouselState extends State<SwipableVerticalCarousel> {
       child: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           return ItemsWidget(
-            key: _itemsKey,
             cards: List.generate(
               widget.widgets.length,
               (index) => CardModel(id: index, child: widget.widgets[index]),
             ),
+            controller: widget.controller,
           );
         },
       ),
     );
-  }
-
-  void swipeUp() {
-    print("Swipe up function called!");
-    _itemsKey.currentState?.swipeUp();
-  }
-
-  void swipeDown() {
-    print("Swipe up function called!");
-    _itemsKey.currentState?.swipeDown();
   }
 }
 
 /// Purpose is to build and display all the cards.
 class ItemsWidget extends StatefulWidget {
   final List<CardModel> cards;
-  const ItemsWidget({super.key, required this.cards});
+  final SwipableCarouselController? controller;
+  const ItemsWidget({super.key, required this.cards, this.controller});
 
   @override
   State<ItemsWidget> createState() => ItemsWidgetState();
@@ -81,6 +76,12 @@ class ItemsWidgetState extends State<ItemsWidget> {
 
   bool isSwiping = false;
   bool isAnimating = false;
+
+  @override
+  void initState() {
+    super.initState();
+    widget.controller?.attach(swipeUp, swipeDown);
+  }
 
   @override
   Widget build(BuildContext context) {

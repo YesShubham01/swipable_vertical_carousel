@@ -1,7 +1,8 @@
-import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/bills_section_carousal.dart';
+import 'package:cred_assignment_by_shubham_puhal/core/constants/app_colors.dart';
+import 'package:cred_assignment_by_shubham_puhal/core/controllers/swipable_carousel_controller.dart';
+import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/bills_section.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/custom_text.dart';
-import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/dummy_carousal.dart';
-import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/main_screen_appbar.dart';
+import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -13,82 +14,41 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late double height; // height of the screen
-  late double width; // width of the screen
+  // screen size
+  Size get screenSize => MediaQuery.of(context).size;
+  double get height => screenSize.height;
+  double get width => screenSize.width;
 
-  final GlobalKey<SwipableVerticalCarouselState> _carouselKey = GlobalKey();
+  // controller
+  final SwipableCarouselController _controller = SwipableCarouselController();
 
   @override
   Widget build(BuildContext context) {
-    var dimensions = MediaQuery.of(
-      context,
-    ).size; // dimension of the screen which can be used to make the design responsive.
-    width = dimensions.width;
-    height = dimensions.height;
-
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 245, 245, 245),
-      appBar: CustomAppBar(title: "Swipable Vertical Carousal"),
-
+      backgroundColor: AppColors
+          .background, // is it good practice to add bg color on scaffold?
+      appBar: const CustomAppBar(title: "Swipable Vertical Carousal"),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // BillsSectionCarousal(),
-          // CustomText(text: "Button"),
-          SwipableVerticalCarousel(
-            key: _carouselKey,
-            widgets: [
-              _card(),
-              _card(),
-              _card(),
-              _card(),
-              _card(),
-              _card(),
-              _card(),
-              _card(),
-              _card(),
-              _card(),
-              _card(),
-              _card(),
-            ],
-          ),
-          Gap(20),
-          // SizedBox(
-          //   height: 300,
-          //   width: width,
-          //   child: OverlappedCarousel(
-          //     widgets: [_card(), _card(), _card(), _card(), _card(), _card()],
-          //     onClicked: (int e) {},
-          //   ),
-          // ),
+          BillsSection(controller: _controller),
+          Gap(height * 0.02),
           ElevatedButton(
             onPressed: () {
-              _carouselKey.currentState?.swipeUp();
+              _controller.swipeUp();
             },
-            child: CustomText(text: "Swipe Up"),
+            child: const CustomText(text: "Swipe Up"),
           ),
 
-          Gap(20),
+          Gap(height * 0.02),
           ElevatedButton(
             onPressed: () {
-              _carouselKey.currentState?.swipeDown();
+              _controller.swipeDown();
             },
-            child: CustomText(text: "Swipe Down"),
+            child: const CustomText(text: "Swipe Down"),
           ),
         ],
-      ),
-    );
-  }
-
-  _card() {
-    return Container(
-      height: 110,
-      width: width * 0.1,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(color: const Color.fromARGB(255, 201, 200, 200)),
-        borderRadius: BorderRadius.all(Radius.circular(5)),
       ),
     );
   }
