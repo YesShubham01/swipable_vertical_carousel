@@ -1,5 +1,6 @@
-import 'package:cred_assignment_by_shubham_puhal/presentation/pages/home_screen.dart';
+import 'package:cred_assignment_by_shubham_puhal/presentation/screens/home_screen.dart';
 import 'package:cred_assignment_by_shubham_puhal/provider/bill_section_provider.dart';
+import 'package:cred_assignment_by_shubham_puhal/provider/controller_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => BillsSectionProvider()..fetchBills(),
         ),
+        ChangeNotifierProvider(create: (_) => ControllerProvider()),
       ],
       child: MaterialApp(
         title: 'Swipable Vertical Carousal',

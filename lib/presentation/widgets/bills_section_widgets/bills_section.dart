@@ -1,7 +1,6 @@
 import 'package:cred_assignment_by_shubham_puhal/core/controllers/swipable_carousel_controller.dart';
 import 'package:cred_assignment_by_shubham_puhal/data/models/section_model.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/shimmers/bill_section_shimmer.dart';
-import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/bills_section_widgets/bill_section_card.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/bills_section_widgets/bill_section_header.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/swipable_vertical_carousel.dart';
 import 'package:cred_assignment_by_shubham_puhal/provider/bill_section_provider.dart';
@@ -10,8 +9,7 @@ import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
 class BillsSection extends StatefulWidget {
-  final SwipableCarouselController? controller;
-  const BillsSection({super.key, this.controller});
+  const BillsSection({super.key});
 
   @override
   State<BillsSection> createState() => BillsSectionState();
@@ -59,7 +57,6 @@ class BillsSectionState extends State<BillsSection> {
               billsCountInt,
               (int index) => listOfChildCards[index].templateProperties,
             ),
-            controller: widget.controller,
           ),
         ],
       ),

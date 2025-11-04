@@ -1,8 +1,9 @@
-import 'package:cred_assignment_by_shubham_puhal/core/controllers/swipable_carousel_controller.dart';
 import 'package:cred_assignment_by_shubham_puhal/data/models/section_model.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/bills_section_widgets/bill_section_card.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/custom_text.dart';
+import 'package:cred_assignment_by_shubham_puhal/provider/controller_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CardModel {
   final int id;
@@ -14,12 +15,7 @@ class CardModel {
 
 class SwipableVerticalCarousel extends StatefulWidget {
   final List<SectionChildTemplatePropertiesModel> cardDataList;
-  final SwipableCarouselController? controller;
-  const SwipableVerticalCarousel({
-    super.key,
-    required this.cardDataList,
-    this.controller,
-  });
+  const SwipableVerticalCarousel({super.key, required this.cardDataList});
 
   @override
   State<SwipableVerticalCarousel> createState() =>
@@ -43,13 +39,12 @@ class SwipableVerticalCarousalState extends State<SwipableVerticalCarousel> {
       width: width,
       child: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
-          return ItemsWidget(
+          return SwipableVerticalCarousalBuilder(
             cards: List.generate(
               widget.cardDataList.length,
               (index) =>
                   CardModel(id: index, cardData: widget.cardDataList[index]),
             ),
-            controller: widget.controller,
           );
         },
       ),
@@ -58,16 +53,17 @@ class SwipableVerticalCarousalState extends State<SwipableVerticalCarousel> {
 }
 
 /// Purpose is to build and display all the cards.
-class ItemsWidget extends StatefulWidget {
+class SwipableVerticalCarousalBuilder extends StatefulWidget {
   final List<CardModel> cards;
-  final SwipableCarouselController? controller;
-  const ItemsWidget({super.key, required this.cards, this.controller});
+  const SwipableVerticalCarousalBuilder({super.key, required this.cards});
 
   @override
-  State<ItemsWidget> createState() => ItemsWidgetState();
+  State<SwipableVerticalCarousalBuilder> createState() =>
+      SwipableVerticalCarousalBuilderState();
 }
 
-class ItemsWidgetState extends State<ItemsWidget> {
+class SwipableVerticalCarousalBuilderState
+    extends State<SwipableVerticalCarousalBuilder> {
   late double height; // height of the screen
   late double width; // width of the screen
 
@@ -82,7 +78,10 @@ class ItemsWidgetState extends State<ItemsWidget> {
   @override
   void initState() {
     super.initState();
-    widget.controller?.attach(swipeUp, swipeDown);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final controllerProvider = context.read<ControllerProvider>();
+      controllerProvider.attach(swipeUp, swipeDown);
+    });
   }
 
   @override
@@ -163,14 +162,9 @@ class ItemsWidgetState extends State<ItemsWidget> {
         duration: const Duration(milliseconds: 500),
         transform: getTransform(card.id),
         alignment: FractionalOffset.center,
-        child: Stack(
-          children: [
-            BillSectionCard(
-              showShadows: showShadows,
-              sectionChildTemplateProperties: card.cardData,
-            ),
-            Center(child: CustomText(text: card.id.toString())),
-          ],
+        child: BillSectionCard(
+          showShadows: showShadows,
+          sectionChildTemplateProperties: card.cardData,
         ),
       ),
     );
@@ -186,10 +180,11 @@ class ItemsWidgetState extends State<ItemsWidget> {
       if (secondActiveIndex < widget.cards.length - 1) {
         firstActiveIndex++;
         secondActiveIndex++;
+        _updateControllerProvider();
       }
     });
     print(
-      "SwipeUp triggered inside ItemsWidget: now at index $firstActiveIndex",
+      "SwipeUp triggered inside SwipableVerticalCarousalBuilder: now at index $firstActiveIndex",
     );
 
     // this few second of disabling swiping prevents multiple swipes with one touch.
@@ -208,6 +203,7 @@ class ItemsWidgetState extends State<ItemsWidget> {
       if (firstActiveIndex > 0) {
         firstActiveIndex--;
         secondActiveIndex--;
+        _updateControllerProvider();
       }
     });
     print("SwipeDown triggered: now at index $firstActiveIndex");
@@ -258,12 +254,17 @@ class ItemsWidgetState extends State<ItemsWidget> {
     return transform;
   }
 
-  /// temporary function to see contrast between elements.
-  Color getColor(int index) {
-    int colorIndex = index % 4;
+  void _updateControllerProvider() {
+    if (firstActiveIndex == 0) {
+      context.read<ControllerProvider>().modifySwipeDownFlag(isEnabled: false);
+    } else {
+      context.read<ControllerProvider>().modifySwipeDownFlag(isEnabled: true);
+    }
 
-    List<Color> colors = [Colors.blue, Colors.red, Colors.yellow, Colors.green];
-
-    return colors[colorIndex];
+    if (secondActiveIndex == childItemCount - 1) {
+      context.read<ControllerProvider>().modifySwipeUpFlag(isEnabled: false);
+    } else {
+      context.read<ControllerProvider>().modifySwipeUpFlag(isEnabled: true);
+    }
   }
 }
