@@ -1,9 +1,14 @@
-import 'package:cred_assignment_by_shubham_puhal/core/utils/context_size_extension.dart';
-import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/custom_circular_button.dart';
-import 'package:cred_assignment_by_shubham_puhal/provider/controller_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:cred_assignment_by_shubham_puhal/core/utils/context_size_extension.dart';
+import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/custom_circular_button.dart';
+import 'package:cred_assignment_by_shubham_puhal/provider/controller_provider.dart';
+
+/// Displays two circular control buttons for swiping the vertical carousel.
+///
+/// - "Swipe Up" triggers [ControllerProvider.carouselSwipeUp]
+/// - "Swipe Down" triggers [ControllerProvider.carouselSwipeDown]
 class CarouselSwipeControlButtons extends StatefulWidget {
   const CarouselSwipeControlButtons({super.key});
 
@@ -16,7 +21,6 @@ class _CarouselSwipeControlButtonsState
     extends State<CarouselSwipeControlButtons> {
   @override
   Widget build(BuildContext context) {
-    // controller provider
     final controllerProvider = context.watch<ControllerProvider>();
 
     return Padding(

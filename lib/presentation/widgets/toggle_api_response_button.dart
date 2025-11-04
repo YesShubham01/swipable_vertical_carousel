@@ -7,6 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
+/// A button to toggle between two API responses and display
+/// the currently active response info below it.
+///
+/// Displays a shimmer while the Bills section is loading.
 class ToggleApiResponseButton extends StatefulWidget {
   const ToggleApiResponseButton({super.key});
 
@@ -19,7 +23,8 @@ class _ToggleApiResponseButtonState extends State<ToggleApiResponseButton> {
   @override
   Widget build(BuildContext context) {
     final provider = context.watch<BillsSectionProvider>();
-    bool isLoading = provider.isLoading;
+    final isLoading = provider.isLoading;
+
     return Column(
       children: [
         CustomButton(

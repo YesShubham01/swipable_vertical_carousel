@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:shimmer/shimmer.dart';
 
+/// Shimmer placeholder displayed while the Bills section is loading.
 class BillsSectionShimmer extends StatefulWidget {
   const BillsSectionShimmer({super.key});
 
@@ -32,7 +33,7 @@ class _BillsSectionShimmerState extends State<BillsSectionShimmer> {
   }
 
   Widget _headerShimmer() {
-    double containerHeight = 30;
+    const containerHeight = 30.0;
     return Row(
       children: [
         ShimmerContainer(height: containerHeight, width: context.width * 0.35),
@@ -45,8 +46,8 @@ class _BillsSectionShimmerState extends State<BillsSectionShimmer> {
   }
 
   Widget _cardListShimmer() {
-    double cardHeight = 95;
-    double cardRadius = 5;
+    const cardHeight = 95.0;
+    const cardRadius = 5.0;
     return Column(
       children: [
         ShimmerContainer(
@@ -63,7 +64,7 @@ class _BillsSectionShimmerState extends State<BillsSectionShimmer> {
         ShimmerContainer(
           height: 25,
           width: context.width * 0.8,
-          radius: BorderRadius.only(
+          radius: const BorderRadius.only(
             bottomLeft: Radius.circular(cardRadius),
             bottomRight: Radius.circular(cardRadius),
           ),
@@ -71,7 +72,7 @@ class _BillsSectionShimmerState extends State<BillsSectionShimmer> {
         ShimmerContainer(
           height: 12,
           width: context.width * 0.7,
-          radius: BorderRadius.only(
+          radius: const BorderRadius.only(
             bottomLeft: Radius.circular(cardRadius),
             bottomRight: Radius.circular(cardRadius),
           ),
