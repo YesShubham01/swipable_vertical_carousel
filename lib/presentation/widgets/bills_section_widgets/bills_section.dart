@@ -2,7 +2,6 @@ import 'package:cred_assignment_by_shubham_puhal/core/controllers/swipable_carou
 import 'package:cred_assignment_by_shubham_puhal/data/models/section_model.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/bills_section_widgets/bill_section_card.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/bills_section_widgets/bill_section_header.dart';
-import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/custom_text.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/swipable_vertical_carousel.dart';
 import 'package:cred_assignment_by_shubham_puhal/provider/bill_section_provider.dart';
 import 'package:flutter/material.dart';
@@ -55,12 +54,9 @@ class BillsSectionState extends State<BillsSection> {
           ),
           Gap(height * 0.03),
           SwipableVerticalCarousel(
-            cardsList: List.generate(
+            cardDataList: List.generate(
               billsCountInt,
-              (int index) => BillSectionCard(
-                sectionChildTemplateProperties:
-                    listOfChildCards[index].templateProperties,
-              ),
+              (int index) => listOfChildCards[index].templateProperties,
             ),
             controller: widget.controller,
           ),

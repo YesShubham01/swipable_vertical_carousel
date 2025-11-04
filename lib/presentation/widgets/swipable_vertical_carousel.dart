@@ -1,21 +1,23 @@
 import 'package:cred_assignment_by_shubham_puhal/core/controllers/swipable_carousel_controller.dart';
+import 'package:cred_assignment_by_shubham_puhal/data/models/section_model.dart';
+import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/bills_section_widgets/bill_section_card.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 
 class CardModel {
   final int id;
   double zIndex;
-  final Widget child;
+  final SectionChildTemplatePropertiesModel cardData;
 
-  CardModel({required this.id, this.zIndex = 0.0, required this.child});
+  CardModel({required this.id, this.zIndex = 0.0, required this.cardData});
 }
 
 class SwipableVerticalCarousel extends StatefulWidget {
-  final List<Widget> cardsList;
+  final List<SectionChildTemplatePropertiesModel> cardDataList;
   final SwipableCarouselController? controller;
   const SwipableVerticalCarousel({
     super.key,
-    required this.cardsList,
+    required this.cardDataList,
     this.controller,
   });
 
@@ -43,8 +45,9 @@ class SwipableVerticalCarousalState extends State<SwipableVerticalCarousel> {
         builder: (BuildContext context, BoxConstraints constraints) {
           return ItemsWidget(
             cards: List.generate(
-              widget.cardsList.length,
-              (index) => CardModel(id: index, child: widget.cardsList[index]),
+              widget.cardDataList.length,
+              (index) =>
+                  CardModel(id: index, cardData: widget.cardDataList[index]),
             ),
             controller: widget.controller,
           );
@@ -162,8 +165,10 @@ class ItemsWidgetState extends State<ItemsWidget> {
         alignment: FractionalOffset.center,
         child: Stack(
           children: [
-            // BillSectionCard(showShadows: showShadows),
-            card.child,
+            BillSectionCard(
+              showShadows: showShadows,
+              sectionChildTemplateProperties: card.cardData,
+            ),
             Center(child: CustomText(text: card.id.toString())),
           ],
         ),
