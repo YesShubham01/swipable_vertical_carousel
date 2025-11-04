@@ -1,22 +1,21 @@
 import 'package:cred_assignment_by_shubham_puhal/core/controllers/swipable_carousel_controller.dart';
-import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/bills_section_widgets/bill_section_card.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 
 class CardModel {
   final int id;
   double zIndex;
-  final Widget? child;
+  final Widget child;
 
-  CardModel({required this.id, this.zIndex = 0.0, this.child});
+  CardModel({required this.id, this.zIndex = 0.0, required this.child});
 }
 
 class SwipableVerticalCarousel extends StatefulWidget {
-  final List<Widget> widgets;
+  final List<Widget> cardsList;
   final SwipableCarouselController? controller;
   const SwipableVerticalCarousel({
     super.key,
-    required this.widgets,
+    required this.cardsList,
     this.controller,
   });
 
@@ -44,8 +43,8 @@ class SwipableVerticalCarousalState extends State<SwipableVerticalCarousel> {
         builder: (BuildContext context, BoxConstraints constraints) {
           return ItemsWidget(
             cards: List.generate(
-              widget.widgets.length,
-              (index) => CardModel(id: index, child: widget.widgets[index]),
+              widget.cardsList.length,
+              (index) => CardModel(id: index, child: widget.cardsList[index]),
             ),
             controller: widget.controller,
           );
@@ -154,16 +153,17 @@ class ItemsWidgetState extends State<ItemsWidget> {
     return AnimatedPositioned(
       curve: Curves.fastOutSlowIn,
       key: ValueKey(card.id),
-      duration: Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 500),
       top: calculateTopDistance(card.id),
       child: AnimatedContainer(
         transformAlignment: Alignment.center,
-        duration: Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 500),
         transform: getTransform(card.id),
         alignment: FractionalOffset.center,
         child: Stack(
           children: [
-            BillSectionCard(showShadows: showShadows),
+            // BillSectionCard(showShadows: showShadows),
+            card.child,
             Center(child: CustomText(text: card.id.toString())),
           ],
         ),

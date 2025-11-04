@@ -6,7 +6,7 @@ class GetBillsSectionUseCase {
 
   GetBillsSectionUseCase(this.repository);
 
-  Future<List<SectionModel>> call() async {
+  Future<SectionModel> call() async {
     return await repository.getBillsSection();
   }
 }

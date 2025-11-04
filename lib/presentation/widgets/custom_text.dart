@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum FontType {
-  sfPro,
-  balooBhai2,
-  balsamiqSans,
-}
+enum FontType { sfPro, balooBhai2, balsamiqSans }
 
 class CustomText extends StatelessWidget {
   final double size;
@@ -13,6 +9,7 @@ class CustomText extends StatelessWidget {
   final FontWeight weight;
   final FontType fontFamily;
   final TextAlign alignment;
+  final int maxLines;
 
   const CustomText({
     super.key,
@@ -22,6 +19,7 @@ class CustomText extends StatelessWidget {
     this.weight = FontWeight.w500,
     this.fontFamily = FontType.sfPro,
     this.alignment = TextAlign.left,
+    this.maxLines = 1,
   });
 
   @override
@@ -36,6 +34,8 @@ class CustomText extends StatelessWidget {
         fontWeight: weight,
       ),
       textAlign: alignment,
+      maxLines: maxLines,
+      overflow: TextOverflow.ellipsis,
     );
   }
 

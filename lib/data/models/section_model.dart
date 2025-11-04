@@ -61,11 +61,11 @@ class SectionTemplatePropertiesModel {
 class SectionBodyModel {
   final bool autoScrollEnabled;
   final BadgeModel badge;
-  final String billsCount;
+  final String billsCount; // the number of bill cards in section
   final CardsAnimationConfigModel cardsAnimationConfig;
   final String orientation;
   final String templateType;
-  final String title;
+  final String title; // title of the section
 
   const SectionBodyModel({
     required this.autoScrollEnabled,
@@ -118,7 +118,7 @@ class BadgeModel {
 }
 
 class CardsAnimationConfigModel {
-  final int count;
+  final int count; //
   final int delay;
   final String duration;
 
@@ -243,13 +243,13 @@ class GradientColor {
 }
 
 class SectionChildBody {
-  final String? footerText;
-  final Logo logo;
-  final String paymentAmount;
-  final String subTitle;
+  final String? footerText; // text of footer-text in card
+  final Logo logo; //
+  final String paymentAmount; //
+  final String subTitle; //
   final String templateType;
-  final String title;
-  final FlipperConfig? flipperConfig;
+  final String title; //
+  final FlipperConfig? flipperConfig; //
   final String? paymentTag;
 
   const SectionChildBody({
@@ -331,9 +331,9 @@ class FinalStage {
 }
 
 class Logo {
-  final String bgColor;
+  final String bgColor; // background color
   final String shape;
-  final String url;
+  final String url; // link to the foreground image
 
   const Logo({required this.bgColor, required this.shape, required this.url});
 

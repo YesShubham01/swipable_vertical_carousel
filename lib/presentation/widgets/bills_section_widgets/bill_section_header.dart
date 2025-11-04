@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 
 class BillSectionHeader extends StatefulWidget {
   final String? title;
-  const BillSectionHeader({super.key, this.title});
+  final String? billsCount;
+  const BillSectionHeader({super.key, this.title, this.billsCount});
 
   @override
   State<BillSectionHeader> createState() => _BillSectionHeaderState();
@@ -15,7 +16,8 @@ class _BillSectionHeaderState extends State<BillSectionHeader> {
     return Row(
       children: [
         CustomText(
-          text: widget.title ?? "UPCOMING BILLS (9)",
+          text:
+              "${widget.title ?? 'UPCOMING BILLS'} (${widget.billsCount ?? 9})",
           size: 18,
           weight: FontWeight.bold,
           color: Colors.black54,
