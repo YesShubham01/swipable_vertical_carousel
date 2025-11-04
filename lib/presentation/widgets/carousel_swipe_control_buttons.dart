@@ -1,3 +1,4 @@
+import 'package:cred_assignment_by_shubham_puhal/core/utils/context_size_extension.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/custom_circular_button.dart';
 import 'package:cred_assignment_by_shubham_puhal/provider/controller_provider.dart';
 import 'package:flutter/material.dart';
@@ -13,18 +14,13 @@ class CarouselSwipeControlButtons extends StatefulWidget {
 
 class _CarouselSwipeControlButtonsState
     extends State<CarouselSwipeControlButtons> {
-  // screen size
-  Size get screenSize => MediaQuery.of(context).size;
-  double get height => screenSize.height;
-  double get width => screenSize.width;
-
   @override
   Widget build(BuildContext context) {
     // controller provider
     final controllerProvider = context.watch<ControllerProvider>();
 
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: width * 0.15),
+      padding: EdgeInsets.symmetric(horizontal: context.width * 0.15),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

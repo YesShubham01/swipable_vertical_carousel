@@ -1,4 +1,4 @@
-import 'package:cred_assignment_by_shubham_puhal/core/controllers/swipable_carousel_controller.dart';
+import 'package:cred_assignment_by_shubham_puhal/core/utils/context_size_extension.dart';
 import 'package:cred_assignment_by_shubham_puhal/data/models/section_model.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/shimmers/bill_section_shimmer.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/bills_section_widgets/bill_section_header.dart';
@@ -16,42 +16,33 @@ class BillsSection extends StatefulWidget {
 }
 
 class BillsSectionState extends State<BillsSection> {
-  // screen size
-  Size get screenSize => MediaQuery.of(context).size;
-  double get height => screenSize.height;
-  double get width => screenSize.width;
-
   @override
   Widget build(BuildContext context) {
     final provider = context.watch<BillsSectionProvider>();
-
     if (provider.isLoading) {
       return const BillsSectionShimmer();
     }
-
     if (provider.error != null) {
       return Center(child: Text('Error: ${provider.error}'));
     }
-
     SectionModel? sectionData = provider.billsSection;
     if (sectionData == null) {
       return const Center(child: Text('No data available'));
     }
-
     SectionBodyModel sectionBody = sectionData.templateProperties.body;
     int billsCountInt = int.tryParse(sectionBody.billsCount.toString()) ?? 1;
     List<SectionChildModel> listOfChildCards =
         sectionData.templateProperties.childList;
 
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: width * 0.05),
+      padding: EdgeInsets.symmetric(horizontal: context.width * 0.05),
       child: Column(
         children: [
           BillSectionHeader(
             title: sectionBody.title,
             billsCount: sectionBody.billsCount,
           ),
-          Gap(height * 0.03),
+          Gap(context.height * 0.03),
           SwipableVerticalCarousel(
             cardDataList: List.generate(
               billsCountInt,

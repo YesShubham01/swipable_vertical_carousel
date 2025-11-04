@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cred_assignment_by_shubham_puhal/core/utils/context_size_extension.dart';
 import 'package:cred_assignment_by_shubham_puhal/data/models/section_model.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
@@ -14,11 +15,6 @@ class BillCardFooterText extends StatefulWidget {
 }
 
 class _BillCardFooterTextState extends State<BillCardFooterText> {
-  // screen size
-  Size get screenSize => MediaQuery.of(context).size;
-  double get height => screenSize.height;
-  double get width => screenSize.width;
-
   late bool flippingText;
   FlipperConfig? flipperData;
 
@@ -85,7 +81,7 @@ class _BillCardFooterTextState extends State<BillCardFooterText> {
           key: ValueKey(currentText),
           alignment: Alignment.center,
           child: ConstrainedBox(
-            constraints: BoxConstraints(maxWidth: width * 0.25),
+            constraints: BoxConstraints(maxWidth: context.width * 0.25),
             child: CustomText(
               key: ValueKey(currentText),
               text: currentText,

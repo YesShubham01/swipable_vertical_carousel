@@ -1,5 +1,5 @@
+import 'package:cred_assignment_by_shubham_puhal/core/utils/context_size_extension.dart';
 import 'package:cred_assignment_by_shubham_puhal/data/models/section_model.dart';
-import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/bills_section_widgets/bill_card_widgets/bill_card_button.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/bills_section_widgets/bill_card_widgets/bill_card_logo.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/bills_section_widgets/bill_card_widgets/bill_card_payment_button_with_status.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/custom_text.dart';
@@ -20,9 +20,6 @@ class BillSectionCard extends StatefulWidget {
 }
 
 class _BillSectionCardState extends State<BillSectionCard> {
-  late double height; // height of the screen
-  late double width; // width of the screen
-
   late SectionChildBody cardData;
 
   @override
@@ -33,15 +30,11 @@ class _BillSectionCardState extends State<BillSectionCard> {
 
   @override
   Widget build(BuildContext context) {
-    var dimensions = MediaQuery.of(context).size;
-    width = dimensions.width;
-    height = dimensions.height;
-
     Logo logoData = cardData.logo;
 
     return Container(
       height: 100,
-      width: width * 0.9,
+      width: context.width * 0.9,
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border.all(color: const Color.fromARGB(255, 201, 200, 200)),

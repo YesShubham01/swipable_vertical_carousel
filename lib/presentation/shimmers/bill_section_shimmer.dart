@@ -1,3 +1,4 @@
+import 'package:cred_assignment_by_shubham_puhal/core/utils/context_size_extension.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/shimmers/shimmer_container.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -11,26 +12,18 @@ class BillsSectionShimmer extends StatefulWidget {
 }
 
 class _BillsSectionShimmerState extends State<BillsSectionShimmer> {
-  // screen size
-  Size get screenSize => MediaQuery.of(context).size;
-  double get height => screenSize.height;
-  double get width => screenSize.width;
-
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
       baseColor: Colors.grey.shade300,
       highlightColor: Colors.grey.shade100,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: width * 0.05),
+        padding: EdgeInsets.symmetric(horizontal: context.width * 0.05),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // header shimmer
             _headerShimmer(),
-            Gap(height * 0.03),
-
-            // card list shimmer
+            Gap(context.height * 0.03),
             _cardListShimmer(),
           ],
         ),
@@ -42,11 +35,11 @@ class _BillsSectionShimmerState extends State<BillsSectionShimmer> {
     double containerHeight = 30;
     return Row(
       children: [
-        ShimmerContainer(height: containerHeight, width: width * 0.35),
+        ShimmerContainer(height: containerHeight, width: context.width * 0.35),
         const Gap(10),
-        ShimmerContainer(height: containerHeight, width: width * 0.05),
+        ShimmerContainer(height: containerHeight, width: context.width * 0.05),
         const Spacer(),
-        ShimmerContainer(height: containerHeight, width: width * 0.2),
+        ShimmerContainer(height: containerHeight, width: context.width * 0.2),
       ],
     );
   }
@@ -58,18 +51,18 @@ class _BillsSectionShimmerState extends State<BillsSectionShimmer> {
       children: [
         ShimmerContainer(
           height: cardHeight,
-          width: width,
+          width: context.width,
           radius: BorderRadius.circular(cardRadius),
         ),
         const Gap(3),
         ShimmerContainer(
           height: cardHeight,
-          width: width,
+          width: context.width,
           radius: BorderRadius.circular(cardRadius),
         ),
         ShimmerContainer(
           height: 25,
-          width: width * 0.8,
+          width: context.width * 0.8,
           radius: BorderRadius.only(
             bottomLeft: Radius.circular(cardRadius),
             bottomRight: Radius.circular(cardRadius),
@@ -77,7 +70,7 @@ class _BillsSectionShimmerState extends State<BillsSectionShimmer> {
         ),
         ShimmerContainer(
           height: 12,
-          width: width * 0.7,
+          width: context.width * 0.7,
           radius: BorderRadius.only(
             bottomLeft: Radius.circular(cardRadius),
             bottomRight: Radius.circular(cardRadius),
