@@ -22,6 +22,8 @@ class CustomCircularButton extends StatefulWidget {
 
 class _CustomCircularButtonState extends State<CustomCircularButton>
     with SingleTickerProviderStateMixin {
+  final Color activeColor = Colors.black;
+  final Color inactiveColor = Colors.grey.shade500;
   bool _isPressed = false;
 
   @override
@@ -29,41 +31,39 @@ class _CustomCircularButtonState extends State<CustomCircularButton>
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Opacity(
-          opacity: widget.isEnabled ? 1.0 : 0.5,
-          child: GestureDetector(
-            onTapDown: widget.isEnabled
-                ? (_) => setState(() => _isPressed = true)
-                : null,
-            onTapUp: widget.isEnabled
-                ? (_) {
-                    setState(() => _isPressed = false);
-                    widget.onTap();
-                  }
-                : null,
-            onTapCancel: widget.isEnabled
-                ? () => setState(() => _isPressed = false)
-                : null,
-            child: AnimatedScale(
-              scale: _isPressed ? 0.92 : 1.0,
-              duration: const Duration(milliseconds: 120),
-              curve: Curves.easeOut,
-              child: Container(
-                height: 60,
-                width: 60,
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.15),
-                      blurRadius: 6,
-                      offset: const Offset(0, 3),
-                    ),
-                  ],
-                ),
-                child: Icon(widget.icon, color: Colors.white, size: 38),
+        GestureDetector(
+          onTapDown: widget.isEnabled
+              ? (_) => setState(() => _isPressed = true)
+              : null,
+          onTapUp: widget.isEnabled
+              ? (_) {
+                  setState(() => _isPressed = false);
+                  widget.onTap();
+                }
+              : null,
+          onTapCancel: widget.isEnabled
+              ? () => setState(() => _isPressed = false)
+              : null,
+          child: AnimatedScale(
+            scale: _isPressed ? 0.92 : 1.0,
+            duration: const Duration(milliseconds: 120),
+            curve: Curves.easeOut,
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 250),
+              height: 60,
+              width: 60,
+              decoration: BoxDecoration(
+                color: widget.isEnabled ? activeColor : inactiveColor,
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.15),
+                    blurRadius: 6,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
               ),
+              child: Icon(widget.icon, color: Colors.white, size: 38),
             ),
           ),
         ),

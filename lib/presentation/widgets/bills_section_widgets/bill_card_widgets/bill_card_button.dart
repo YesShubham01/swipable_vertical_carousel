@@ -1,7 +1,6 @@
 import 'package:cred_assignment_by_shubham_puhal/data/models/section_model.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 
 class BillCardButton extends StatefulWidget {
   final SectionChildBody cardData;
@@ -20,7 +19,7 @@ class _BillCardButtonState extends State<BillCardButton> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: width * 0.25,
+      width: width * 0.28,
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       decoration: BoxDecoration(
         color: Colors.black,

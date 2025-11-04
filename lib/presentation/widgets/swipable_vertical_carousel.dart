@@ -1,17 +1,10 @@
+import 'package:cred_assignment_by_shubham_puhal/core/utils/context_size_extension.dart';
 import 'package:cred_assignment_by_shubham_puhal/data/models/section_model.dart';
+import 'package:cred_assignment_by_shubham_puhal/presentation/entities/card_entity.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/bills_section_widgets/bill_section_card.dart';
-import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/custom_text.dart';
 import 'package:cred_assignment_by_shubham_puhal/provider/controller_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-class CardModel {
-  final int id;
-  double zIndex;
-  final SectionChildTemplatePropertiesModel cardData;
-
-  CardModel({required this.id, this.zIndex = 0.0, required this.cardData});
-}
 
 class SwipableVerticalCarousel extends StatefulWidget {
   final List<SectionChildTemplatePropertiesModel> cardDataList;
@@ -23,27 +16,18 @@ class SwipableVerticalCarousel extends StatefulWidget {
 }
 
 class SwipableVerticalCarousalState extends State<SwipableVerticalCarousel> {
-  late double height; // height of the screen
-  late double width; // width of the screen
-
   @override
   Widget build(BuildContext context) {
-    var dimensions = MediaQuery.of(
-      context,
-    ).size; // dimension of the screen to make the design responsive.
-    width = dimensions.width;
-    height = dimensions.height;
-
     return SizedBox(
       height: 300,
-      width: width,
+      width: context.width,
       child: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           return SwipableVerticalCarousalBuilder(
             cards: List.generate(
               widget.cardDataList.length,
               (index) =>
-                  CardModel(id: index, cardData: widget.cardDataList[index]),
+                  CardEntity(id: index, cardData: widget.cardDataList[index]),
             ),
           );
         },
@@ -54,7 +38,7 @@ class SwipableVerticalCarousalState extends State<SwipableVerticalCarousel> {
 
 /// Purpose is to build and display all the cards.
 class SwipableVerticalCarousalBuilder extends StatefulWidget {
-  final List<CardModel> cards;
+  final List<CardEntity> cards;
   const SwipableVerticalCarousalBuilder({super.key, required this.cards});
 
   @override
@@ -64,9 +48,6 @@ class SwipableVerticalCarousalBuilder extends StatefulWidget {
 
 class SwipableVerticalCarousalBuilderState
     extends State<SwipableVerticalCarousalBuilder> {
-  late double height; // height of the screen
-  late double width; // width of the screen
-
   late int childItemCount;
 
   int firstActiveIndex = 0;
@@ -78,27 +59,23 @@ class SwipableVerticalCarousalBuilderState
   @override
   void initState() {
     super.initState();
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final controllerProvider = context.read<ControllerProvider>();
       controllerProvider.attach(swipeUp, swipeDown);
+      _updateControllerProvider();
     });
+
+    childItemCount = widget.cards.length;
   }
 
   @override
   Widget build(BuildContext context) {
-    var dimensions = MediaQuery.of(context).size;
-    width = dimensions.width;
-    height = dimensions.height;
-
-    childItemCount = widget.cards.length;
-
     return GestureDetector(
       onVerticalDragUpdate: (details) {
         if (details.delta.dy < -10) {
-          // Swipe Up
           swipeUp();
         } else if (details.delta.dy > 10) {
-          // Swipe Down
           swipeDown();
         }
       },
@@ -106,36 +83,29 @@ class SwipableVerticalCarousalBuilderState
         child: Stack(
           alignment: AlignmentDirectional.center,
           clipBehavior: Clip.none,
-          children: _sortChildrenAndBuild(
-            widget.cards,
-          ), // here i need to use a middle function to adjust z-index of children of stack
+          children: _sortChildrenAndBuild(widget.cards),
         ),
       ),
     );
   }
 
-  List<Widget> _sortChildrenAndBuild(List<CardModel> cards) {
-    // compute the appropriate z-axis
+  /// this function assign stackIndex to each card which is used to decide order of elements in stack
+  List<Widget> _sortChildrenAndBuild(List<CardEntity> cards) {
     for (int i = 0; i < cards.length; i++) {
-      if (cards[i].id == firstActiveIndex) {
-        cards[i].zIndex = 1.0; // top most
-      } else if (cards[i].id == secondActiveIndex) {
-        cards[i].zIndex = 1.0; // top most
+      if (cards[i].id == firstActiveIndex || cards[i].id == secondActiveIndex) {
+        cards[i].stackIndex = 1.0; // top most
       } else if (cards[i].id > secondActiveIndex) {
-        cards[i].zIndex = ((cards[i].id - secondActiveIndex) + 2).toDouble();
+        cards[i].stackIndex = ((cards[i].id - secondActiveIndex) + 2)
+            .toDouble();
       } else if (firstActiveIndex != 0 &&
           cards[i].id == (firstActiveIndex - 1)) {
-        // it means it is the card which was at firstActiveIndex in last state.
-        // assign it 3rd position
-        cards[i].zIndex = 3.0;
+        cards[i].stackIndex = 3.0;
       } else {
-        cards[i].zIndex = (cards.length + (firstActiveIndex - cards[i].id))
+        cards[i].stackIndex = (cards.length + (firstActiveIndex - cards[i].id))
             .toDouble();
       }
     }
-
-    // sort the cards according to z-axis
-    cards.sort((a, b) => b.zIndex.compareTo(a.zIndex));
+    cards.sort((a, b) => b.stackIndex.compareTo(a.stackIndex));
 
     // show only top 4 cards or 5 cards depending on the scroll position.
     int visibleCardCount = (firstActiveIndex == 0) ? 4 : 5;
@@ -143,12 +113,11 @@ class SwipableVerticalCarousalBuilderState
         .skip((cards.length - visibleCardCount).clamp(0, cards.length))
         .toList();
 
-    // display
     return visibleCards.map((e) => _displayCarousal(e)).toList();
   }
 
-  /// display single card with it's appropriate position and animation.
-  Widget _displayCarousal(CardModel card) {
+  /// display card
+  Widget _displayCarousal(CardEntity card) {
     bool showShadows =
         !(card.id == firstActiveIndex &&
             !isAnimating); // flag to show shadow in BillSectionCard if it's not at firstActiveIndex
@@ -170,7 +139,6 @@ class SwipableVerticalCarousalBuilderState
     );
   }
 
-  /// temporary function to mock the swipe function : added because it's hard to swipe on emulator.
   void swipeUp() {
     if (isSwiping) return;
     isSwiping = true;
