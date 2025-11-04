@@ -3,7 +3,7 @@ import 'package:cred_assignment_by_shubham_puhal/data/models/section_model.dart'
 
 /// Abstract contract for the repository
 abstract class BillsSectionRepository {
-  Future<SectionModel> getBillsSection();
+  Future<SectionModel> getBillsSection({required String url});
 }
 
 /// Implementation of [BillsSectionRepository].
@@ -13,9 +13,9 @@ class BillsSectionRepositoryImpl implements BillsSectionRepository {
   BillsSectionRepositoryImpl({required this.remoteDataSource});
 
   @override
-  Future<SectionModel> getBillsSection() async {
+  Future<SectionModel> getBillsSection({required String url}) async {
     try {
-      final sectionJson = await remoteDataSource.fetchBillsSection();
+      final sectionJson = await remoteDataSource.fetchBillsSection(url: url);
 
       // Convert JSON list to list of SectionModel
       final sectionData = SectionModel.fromJson(sectionJson);

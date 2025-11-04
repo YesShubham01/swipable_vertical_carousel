@@ -3,8 +3,10 @@ import 'package:cred_assignment_by_shubham_puhal/core/controllers/swipable_carou
 import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/bills_section_widgets/bills_section.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/custom_text.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/custom_app_bar.dart';
+import 'package:cred_assignment_by_shubham_puhal/provider/bill_section_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -24,6 +26,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // provider
+    final provider = context.watch<BillsSectionProvider>();
+
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: const CustomAppBar(title: "Swipable Vertical Carousel"),
@@ -50,6 +55,16 @@ class _HomeScreenState extends State<HomeScreen> {
               _controller.swipeDown();
             },
             child: const CustomText(text: "Swipe Down"),
+          ),
+
+          Gap(height * 0.02),
+
+          // swipe down button
+          ElevatedButton(
+            onPressed: () {
+              provider.toggleResponse();
+            },
+            child: const CustomText(text: "Change Response"),
           ),
         ],
       ),
