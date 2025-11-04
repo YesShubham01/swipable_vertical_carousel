@@ -33,11 +33,12 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: AppColors.background,
       appBar: const CustomAppBar(title: "Swipable Vertical Carousel"),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          Gap(height * 0.1),
           // your bills section
-          BillsSection(controller: _controller),
+          SizedBox(height: 400, child: BillsSection(controller: _controller)),
           Gap(height * 0.02),
 
           // swipe up button
@@ -56,7 +57,6 @@ class _HomeScreenState extends State<HomeScreen> {
             },
             child: const CustomText(text: "Swipe Down"),
           ),
-
           Gap(height * 0.02),
 
           // swipe down button

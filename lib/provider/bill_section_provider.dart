@@ -6,9 +6,13 @@ import 'package:cred_assignment_by_shubham_puhal/data/data_sources/bills_section
 import 'package:http/http.dart' as http;
 
 class BillsSectionProvider extends ChangeNotifier {
-  final _repository = BillsSectionRepositoryImpl(
-    remoteDataSource: BillsSectionRemoteDataSource(http.Client()),
-  );
+  final BillsSectionRepositoryImpl _repository;
+  BillsSectionProvider({BillsSectionRepositoryImpl? repository})
+    : _repository =
+          repository ??
+          BillsSectionRepositoryImpl(
+            remoteDataSource: BillsSectionRemoteDataSource(http.Client()),
+          );
 
   bool _isLoading = false;
   String? _error;
@@ -41,9 +45,9 @@ class BillsSectionProvider extends ChangeNotifier {
   }
 
   /// toggle between 2-item and 9-item responses
-  void toggleResponse() {
+  Future<void> toggleResponse() async {
     _showFirstResponse = !_showFirstResponse;
-    fetchBills();
+    await fetchBills();
   }
 
   SectionModel? get billsSection => _sectionData;

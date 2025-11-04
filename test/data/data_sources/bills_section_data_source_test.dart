@@ -18,9 +18,9 @@ void main() {
   });
 
   test('should return a Map when response code is 200', () async {
-    final testUri = Uri.parse(
-      'https://jsonblob.com/api/jsonBlob/1425067032428339200',
-    );
+    // arrange
+    const testUrl = 'https://jsonblob.com/api/jsonBlob/1425067032428339200';
+    final testUri = Uri.parse(testUrl);
 
     final mockJson = jsonEncode({
       "entity_type": "section",
@@ -38,22 +38,28 @@ void main() {
       mockClient.get(testUri),
     ).thenAnswer((_) async => http.Response(mockJson, 200));
 
-    final result = await dataSource.fetchBillsSection();
+    // act
+    final result = await dataSource.fetchBillsSection(url: testUrl);
 
+    // assert
     expect(result, isA<Map<String, dynamic>>());
-    expect(result["entity_type"], "section");
-    expect(result["template_name"], "your_bills_section_horizontal");
+    expect(result['entity_type'], equals('section'));
+    expect(result['template_name'], equals('your_bills_section_horizontal'));
   });
 
   test('should throw Exception when response code is not 200', () async {
-    final testUri = Uri.parse(
-      'https://jsonblob.com/api/jsonBlob/1425067032428339200',
-    );
+    // arrange
+    const testUrl = 'https://jsonblob.com/api/jsonBlob/1425067032428339200';
+    final testUri = Uri.parse(testUrl);
 
     when(
       mockClient.get(testUri),
     ).thenAnswer((_) async => http.Response('Error', 404));
 
-    expect(() => dataSource.fetchBillsSection(), throwsException);
+    // act + assert
+    expect(
+      () => dataSource.fetchBillsSection(url: testUrl),
+      throwsA(isA<Exception>()),
+    );
   });
 }

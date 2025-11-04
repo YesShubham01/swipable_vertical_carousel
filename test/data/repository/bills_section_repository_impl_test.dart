@@ -61,10 +61,10 @@ void main() {
         };
 
         when(
-          mockDataSource.fetchBillsSection(),
+          mockDataSource.fetchBillsSection(url: anyNamed('url')),
         ).thenAnswer((_) async => mockJsonList);
 
-        final result = await repository.getBillsSection();
+        final result = await repository.getBillsSection(url: 'mock_url');
 
         expect(result, isA<SectionModel>());
         expect(result.entityType, 'bills');
@@ -72,17 +72,19 @@ void main() {
         expect(result.templateProperties.body.badge.cta.primary?.title, "Pay");
         expect(result.templateProperties.ctas.primary?.title, "Pay Now");
 
-        verify(mockDataSource.fetchBillsSection()).called(1);
+        verify(
+          mockDataSource.fetchBillsSection(url: anyNamed('url')),
+        ).called(1);
       },
     );
 
     test('should throw exception when data source throws', () async {
       when(
-        mockDataSource.fetchBillsSection(),
+        mockDataSource.fetchBillsSection(url: anyNamed('url')),
       ).thenThrow(Exception('Network error'));
 
       expect(
-        () async => await repository.getBillsSection(),
+        () async => await repository.getBillsSection(url: 'mock_url'),
         throwsA(isA<Exception>()),
       );
     });
