@@ -23,6 +23,8 @@ class _BillCardFooterTextState extends State<BillCardFooterText> {
   FlipperConfig? flipperData;
 
   int currentIndex = 0;
+  int completedFlips = 0;
+  late String currentText;
   Timer? _timer;
 
   @override
@@ -52,7 +54,10 @@ class _BillCardFooterTextState extends State<BillCardFooterText> {
       );
     } else {
       // Else, flip between texts in flipper config.
-      final currentText = flipperData!.items[currentIndex].text;
+      if (currentIndex != -1) {
+        // For non flinal states
+        currentText = flipperData!.items[currentIndex].text;
+      }
 
       return AnimatedSwitcher(
         duration: const Duration(milliseconds: 500),
@@ -98,9 +103,19 @@ class _BillCardFooterTextState extends State<BillCardFooterText> {
 
   void _startFlipping() {
     final delay = Duration(milliseconds: flipperData?.flipDelay ?? 2000);
+    final maxFlips = flipperData?.flipCount ?? 0;
+
     _timer = Timer.periodic(delay, (timer) {
       setState(() {
         currentIndex = (currentIndex + 1) % flipperData!.items.length;
+        completedFlips++;
+        if (maxFlips > 0 && completedFlips >= maxFlips) {
+          _timer?.cancel();
+          currentIndex = -1;
+          if (flipperData?.finalStage.text != null) {
+            currentText = flipperData?.finalStage.text as String;
+          }
+        }
       });
     });
   }

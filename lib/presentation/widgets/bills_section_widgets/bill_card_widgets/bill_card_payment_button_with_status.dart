@@ -21,6 +21,8 @@ class _BillCardPaymentButtonWithStatusState
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
+        const Gap(5),
+
         BillCardButton(cardData: widget.cardData),
         const Gap(5),
         BillCardFooterText(cardData: widget.cardData),
