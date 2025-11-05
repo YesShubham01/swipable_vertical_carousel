@@ -1,4 +1,4 @@
-import 'package:cred_assignment_by_shubham_puhal/core/utils/string_to_color_extension.dart';
+import 'package:cred_assignment_by_shubham_puhal/core/extensions/string_to_color_extension.dart';
 import 'package:cred_assignment_by_shubham_puhal/data/models/section_model.dart';
 import 'package:flutter/material.dart';
 

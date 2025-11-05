@@ -1,4 +1,4 @@
-import 'package:cred_assignment_by_shubham_puhal/core/utils/context_size_extension.dart';
+import 'package:cred_assignment_by_shubham_puhal/core/extensions/context_size_extension.dart';
 import 'package:cred_assignment_by_shubham_puhal/data/models/section_model.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/customised_widgets/custom_text.dart';
 import 'package:flutter/material.dart';

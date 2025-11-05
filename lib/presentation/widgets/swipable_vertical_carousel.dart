@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:cred_assignment_by_shubham_puhal/core/utils/context_size_extension.dart';
+import 'package:cred_assignment_by_shubham_puhal/core/extensions/context_size_extension.dart';
 import 'package:cred_assignment_by_shubham_puhal/data/models/section_model.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/entities/card_entity.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/swipable_vertical_carousel/swipable_vertical_carousel_builder.dart';

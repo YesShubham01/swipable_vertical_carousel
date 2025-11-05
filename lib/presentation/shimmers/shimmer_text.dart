@@ -1,4 +1,4 @@
-import 'package:cred_assignment_by_shubham_puhal/core/utils/get_size_of_custom_text_extension.dart';
+import 'package:cred_assignment_by_shubham_puhal/core/extensions/get_size_of_custom_text_extension.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/customised_widgets/custom_text.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/shimmers/shimmer_container.dart';
 import 'package:flutter/material.dart';

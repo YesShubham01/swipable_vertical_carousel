@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:gap/gap.dart';
 
-import 'package:cred_assignment_by_shubham_puhal/core/utils/context_size_extension.dart';
+import 'package:cred_assignment_by_shubham_puhal/core/extensions/context_size_extension.dart';
 import 'package:cred_assignment_by_shubham_puhal/data/models/section_model.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/shimmers/bill_section_shimmer.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/bills_section_widgets/bill_section_header.dart';

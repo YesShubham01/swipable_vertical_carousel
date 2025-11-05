@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
-import 'package:cred_assignment_by_shubham_puhal/core/utils/context_size_extension.dart';
+import 'package:cred_assignment_by_shubham_puhal/core/extensions/context_size_extension.dart';
 import 'package:cred_assignment_by_shubham_puhal/data/models/section_model.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/bills_section_widgets/bill_card_widgets/bill_card_logo.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/bills_section_widgets/bill_card_widgets/bill_card_payment_button_with_status.dart';
