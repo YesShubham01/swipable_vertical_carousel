@@ -1,11 +1,10 @@
-import 'dart:async';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'package:cred_assignment_by_shubham_puhal/core/utils/context_size_extension.dart';
 import 'package:cred_assignment_by_shubham_puhal/data/models/section_model.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/customised_widgets/custom_text.dart';
 import 'package:cred_assignment_by_shubham_puhal/provider/bill_flipper_sync_provider.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class BillCardFooterText extends StatefulWidget {
   final SectionChildBody cardData;

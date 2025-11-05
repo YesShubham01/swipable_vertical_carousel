@@ -1,3 +1,4 @@
+import 'package:cred_assignment_by_shubham_puhal/presentation/entities/carousel_layout_config_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:shimmer/shimmer.dart';
@@ -74,8 +75,10 @@ class _BillsSectionShimmerState extends State<BillsSectionShimmer> {
     );
   }
 
-  Widget _cardListShimmer() {
-    const cardHeight = 95.0;
+  Widget _cardListShimmer({
+    CarouselLayoutConfig config = const CarouselLayoutConfig(),
+  }) {
+    final cardHeight = config.secondCardOffset;
     const cardRadius = 5.0;
     return Column(
       children: [
