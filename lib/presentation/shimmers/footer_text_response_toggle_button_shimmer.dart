@@ -1,8 +1,9 @@
-import 'package:cred_assignment_by_shubham_puhal/core/utils/context_size_extension.dart';
-import 'package:cred_assignment_by_shubham_puhal/presentation/shimmers/shimmer_container.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:shimmer/shimmer.dart';
+
+import 'package:cred_assignment_by_shubham_puhal/presentation/shimmers/shimmer_text.dart';
+import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/custom_text.dart';
 
 class FooterTextResponseToggleButtonShimmer extends StatelessWidget {
   const FooterTextResponseToggleButtonShimmer({super.key});
@@ -12,12 +13,17 @@ class FooterTextResponseToggleButtonShimmer extends StatelessWidget {
     return Shimmer.fromColors(
       baseColor: Colors.grey.shade300,
       highlightColor: Colors.grey.shade100,
-      child: Column(
+      child: const Column(
         children: [
-          const Gap(3),
-          ShimmerContainer(height: 17, width: context.width * 0.5),
-          const Gap(3),
-          ShimmerContainer(height: 17, width: context.width * 0.2),
+          Gap(3),
+          ShimmerText(
+            child: CustomText(
+              text: "Displaying data from Response 1",
+              size: 18,
+            ),
+          ),
+          Gap(3),
+          ShimmerText(child: CustomText(text: "(9 items)", size: 18)),
         ],
       ),
     );

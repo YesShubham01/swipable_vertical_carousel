@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
 class ShimmerContainer extends StatelessWidget {
-  final double width;
-  final double height;
+  final double? width;
+  final double? height;
+  final Widget? child;
   final BorderRadiusGeometry? radius;
   const ShimmerContainer({
     super.key,
-    required this.height,
-    required this.width,
+    this.height,
+    this.width,
     this.radius,
+    this.child,
   });
 
   @override
@@ -20,6 +22,7 @@ class ShimmerContainer extends StatelessWidget {
         color: Colors.white,
         borderRadius: radius ?? BorderRadius.circular(5),
       ),
+      child: child,
     );
   }
 }

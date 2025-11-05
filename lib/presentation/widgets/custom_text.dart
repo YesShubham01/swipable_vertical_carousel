@@ -26,26 +26,14 @@ class CustomText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: TextStyle(
-        fontFamily:
-            _getFontFamily(), // Ensure this font is added in pubspec.yaml
-        fontSize: size,
-        color: color,
-        fontWeight: weight,
-      ),
+      style: TextStyle(fontSize: size, color: color, fontWeight: weight),
       textAlign: alignment,
       maxLines: maxLines,
       overflow: TextOverflow.ellipsis,
     );
   }
 
-  String _getFontFamily() {
-    if (fontFamily == FontType.balsamiqSans) {
-      return "BalsamiqSans";
-    } else if (fontFamily == FontType.balooBhai2) {
-      return "Baloo-Bhai-2";
-    } else {
-      return "SF-Pro";
-    }
+  TextStyle getStyle() {
+    return TextStyle(fontSize: size, color: color, fontWeight: weight);
   }
 }
