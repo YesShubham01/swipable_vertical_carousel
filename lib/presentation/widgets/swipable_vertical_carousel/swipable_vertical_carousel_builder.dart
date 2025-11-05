@@ -47,6 +47,7 @@ class SwipableVerticalCarousalBuilderState
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      key: const Key('swipable_carousel'),
       onVerticalDragUpdate: (details) {
         if (details.delta.dy < -10) {
           swipeUp();
@@ -105,6 +106,7 @@ class SwipableVerticalCarousalBuilderState
         transform: getTransform(card.id),
         alignment: FractionalOffset.center,
         child: BillSectionCard(
+          key: ValueKey('bill_card_${card.cardData.body.title}'),
           showShadows: showShadows,
           cardData: card.cardData.body,
         ),
