@@ -4,11 +4,15 @@ import 'package:flutter/material.dart';
 class ControllerProvider extends ChangeNotifier {
   final SwipableCarouselController carouselController =
       SwipableCarouselController();
+
+  // variables
   bool _swipeUpEnabled = true;
   bool _swipeDownEnabled = false;
 
+  // getters
   bool get swipeUpEnabled => _swipeUpEnabled;
   bool get swipeDownEnabled => _swipeDownEnabled;
+
   void carouselSwipeUp() {
     carouselController.swipeUp();
   }

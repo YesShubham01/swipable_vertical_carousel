@@ -5,8 +5,8 @@ import 'package:cred_assignment_by_shubham_puhal/core/constants/app_colors.dart'
 import 'package:cred_assignment_by_shubham_puhal/core/extensions/context_size_extension.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/bills_section_widgets/bills_section.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/customised_widgets/custom_app_bar.dart';
-import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/carousel_swipe_control_buttons.dart';
-import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/toggle_api_response_button.dart';
+import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/user_input_widgets/carousel_swipe_control_buttons.dart';
+import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/user_input_widgets/toggle_api_response_button.dart';
 
 /// The main screen displaying the swipable vertical carousel and control options.
 ///
@@ -36,7 +36,10 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Gap((height * 0.1).clamp(40.0, 80.0)),
-              SizedBox(height: height * 0.4, child: const BillsSection()),
+              SizedBox(
+                height: (height * 0.4).clamp(360.0, 400.0),
+                child: const BillsSection(),
+              ),
               Gap(height * 0.02),
               const CarouselSwipeControlButtons(),
               Gap(height * 0.03),

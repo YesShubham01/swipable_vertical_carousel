@@ -8,6 +8,7 @@ class CarouselLayoutConfig {
   final double scaleFactorAhead;
   final double minScale;
   final int animationDurationMs;
+  final int disableDurationAfterSwipe;
 
   const CarouselLayoutConfig({
     this.cardHeight = 300,
@@ -17,6 +18,7 @@ class CarouselLayoutConfig {
     this.scaleFactorBehind = 0.5,
     this.scaleFactorAhead = 0.1,
     this.minScale = 0.7,
-    this.animationDurationMs = 500,
+    this.animationDurationMs = 400,
+    this.disableDurationAfterSwipe = 250,
   });
 }

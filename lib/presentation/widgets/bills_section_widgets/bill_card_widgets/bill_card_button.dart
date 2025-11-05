@@ -1,4 +1,3 @@
-import 'package:cred_assignment_by_shubham_puhal/core/extensions/context_size_extension.dart';
 import 'package:cred_assignment_by_shubham_puhal/data/models/section_model.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/customised_widgets/custom_text.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +14,7 @@ class _BillCardButtonState extends State<BillCardButton> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: context.width * 0.28,
+      width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       decoration: BoxDecoration(
         color: Colors.black,

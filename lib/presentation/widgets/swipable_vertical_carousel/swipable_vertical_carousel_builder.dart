@@ -180,12 +180,15 @@ class SwipableVerticalCarousalBuilderState
 
   /// this few second of disabling swiping prevents multiple swipes with one touch.
   void _disableSwipeForDuration() {
-    Future.delayed(Duration(milliseconds: config.animationDurationMs), () {
-      isSwiping = false;
-      setState(() {
-        isAnimating = false;
-      });
-    });
+    Future.delayed(
+      Duration(milliseconds: config.disableDurationAfterSwipe),
+      () {
+        isSwiping = false;
+        setState(() {
+          isAnimating = false;
+        });
+      },
+    );
   }
 
   void _updateControllerProvider() {

@@ -14,11 +14,13 @@ class BillsSectionProvider extends ChangeNotifier {
             remoteDataSource: BillsSectionRemoteDataSource(http.Client()),
           );
 
+  // variables
   bool _isLoading = false;
   String? _error;
   SectionModel? _sectionData;
   bool _showFirstResponse = false;
 
+  // getters
   bool get isLoading => _isLoading;
   String? get error => _error;
   SectionModel? get sectionData => _sectionData;

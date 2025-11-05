@@ -16,12 +16,18 @@ class BillCardTitleWithSubtitle extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CustomText(text: title, size: 20, weight: FontWeight.w800),
-        CustomText(
-          text: subTitle,
-          size: 16,
-          color: const Color.fromARGB(255, 130, 130, 130),
-          weight: FontWeight.w500,
+        FittedBox(
+          fit: BoxFit.scaleDown,
+          child: CustomText(text: title, size: 20, weight: FontWeight.w800),
+        ),
+        FittedBox(
+          fit: BoxFit.scaleDown,
+          child: CustomText(
+            text: subTitle,
+            size: 16,
+            color: const Color.fromARGB(255, 130, 130, 130),
+            weight: FontWeight.w500,
+          ),
         ),
       ],
     );

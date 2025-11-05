@@ -6,7 +6,6 @@ import 'package:cred_assignment_by_shubham_puhal/core/extensions/context_size_ex
 import 'package:cred_assignment_by_shubham_puhal/data/models/section_model.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/bills_section_widgets/bill_card_widgets/bill_card_logo.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/bills_section_widgets/bill_card_widgets/bill_card_payment_button_with_status.dart';
-import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/customised_widgets/custom_text.dart';
 
 class BillSectionCard extends StatelessWidget {
   final bool showShadows;
@@ -36,12 +35,18 @@ class BillSectionCard extends StatelessWidget {
           children: [
             BillCardLogo(logoData: cardData.logo),
             const Gap(15),
-            BillCardTitleWithSubtitle(
-              title: cardData.title,
-              subTitle: cardData.subTitle,
+            Expanded(
+              flex: 5,
+              child: BillCardTitleWithSubtitle(
+                title: cardData.title,
+                subTitle: cardData.subTitle,
+              ),
             ),
-            const Spacer(),
-            BillCardPaymentButtonWithStatus(cardData: cardData),
+            const Gap(10),
+            Expanded(
+              flex: 3,
+              child: BillCardPaymentButtonWithStatus(cardData: cardData),
+            ),
           ],
         ),
       ),

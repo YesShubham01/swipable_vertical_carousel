@@ -6,7 +6,7 @@ import 'package:cred_assignment_by_shubham_puhal/core/extensions/context_size_ex
 import 'package:cred_assignment_by_shubham_puhal/data/models/section_model.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/shimmers/bill_section_shimmer.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/bills_section_widgets/bill_section_header.dart';
-import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/swipable_vertical_carousel.dart';
+import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/swipable_vertical_carousel/swipable_vertical_carousel.dart';
 import 'package:cred_assignment_by_shubham_puhal/provider/bill_section_provider.dart';
 
 /// Displays the Bills section which includes a header and
