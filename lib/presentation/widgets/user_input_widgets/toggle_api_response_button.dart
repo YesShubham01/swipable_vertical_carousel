@@ -37,6 +37,7 @@ class _ToggleApiResponseButtonState extends State<ToggleApiResponseButton> {
         isLoading
             ? const FooterTextResponseToggleButtonShimmer()
             : CustomText(
+                key: const Key('footer-response-text'),
                 text: provider.showFirstResponse
                     ? "Displaying data from Response 1 \n(2 items)"
                     : "Displaying data from Response 2 \n(9 items)",
