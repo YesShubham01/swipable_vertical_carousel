@@ -1,9 +1,9 @@
-import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/custom_text.dart';
+import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/customised_widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final String title; // Accepts title dynamically
+  final String title;
   final bool applyBackButton;
   final Color? customColor;
 
@@ -42,14 +42,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       onTap: () {
         Navigator.pop(context);
       },
-      child: const Row(
-        children: [
-          Icon(
-            Icons.arrow_back,
-          ),
-          Gap(10),
-        ],
-      ),
+      child: const Row(children: [Icon(Icons.arrow_back), Gap(10)]),
     );
   }
 }

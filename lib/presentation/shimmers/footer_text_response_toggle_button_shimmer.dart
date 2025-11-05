@@ -3,7 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:shimmer/shimmer.dart';
 
 import 'package:cred_assignment_by_shubham_puhal/presentation/shimmers/shimmer_text.dart';
-import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/custom_text.dart';
+import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/customised_widgets/custom_text.dart';
 
 class FooterTextResponseToggleButtonShimmer extends StatelessWidget {
   const FooterTextResponseToggleButtonShimmer({super.key});

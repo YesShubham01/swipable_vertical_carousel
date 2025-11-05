@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// A container used with shimmer.
 class ShimmerContainer extends StatelessWidget {
   final double? width;
   final double? height;

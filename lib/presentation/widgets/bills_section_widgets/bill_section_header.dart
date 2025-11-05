@@ -1,4 +1,4 @@
-import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/custom_text.dart';
+import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/customised_widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 
 class BillSectionHeader extends StatelessWidget {

@@ -4,7 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:cred_assignment_by_shubham_puhal/core/constants/app_colors.dart';
 import 'package:cred_assignment_by_shubham_puhal/core/utils/context_size_extension.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/bills_section_widgets/bills_section.dart';
-import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/custom_app_bar.dart';
+import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/customised_widgets/custom_app_bar.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/carousel_swipe_control_buttons.dart';
 import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/toggle_api_response_button.dart';
 

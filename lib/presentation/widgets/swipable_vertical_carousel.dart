@@ -133,7 +133,7 @@ class SwipableVerticalCarousalBuilderState
         alignment: FractionalOffset.center,
         child: BillSectionCard(
           showShadows: showShadows,
-          sectionChildTemplateProperties: card.cardData,
+          cardData: card.cardData.body,
         ),
       ),
     );

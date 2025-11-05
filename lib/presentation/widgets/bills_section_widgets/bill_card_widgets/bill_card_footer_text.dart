@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:cred_assignment_by_shubham_puhal/core/utils/context_size_extension.dart';
 import 'package:cred_assignment_by_shubham_puhal/data/models/section_model.dart';
-import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/custom_text.dart';
+import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/customised_widgets/custom_text.dart';
+import 'package:cred_assignment_by_shubham_puhal/provider/bill_flipper_sync_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class BillCardFooterText extends StatefulWidget {
   final SectionChildBody cardData;
@@ -18,11 +20,6 @@ class _BillCardFooterTextState extends State<BillCardFooterText> {
   late bool flippingText;
   FlipperConfig? flipperData;
 
-  int currentIndex = 0;
-  int completedFlips = 0;
-  late String currentText;
-  Timer? _timer;
-
   @override
   void initState() {
     super.initState();
@@ -33,14 +30,18 @@ class _BillCardFooterTextState extends State<BillCardFooterText> {
 
     if (flippingText) {
       flipperData = widget.cardData.flipperConfig!;
-      _startFlipping();
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        context.read<FlipperSyncProvider>().startFlipping(
+          intervalMs: flipperData!.flipDelay,
+          maxItems: flipperData!.items.length,
+        );
+      });
     }
   }
 
-  /// Display static text if cardData.footerText is not empty.
-  /// Else display use FlipperConfig to display flipping text.
   @override
   Widget build(BuildContext context) {
+    // Display static footer text if cardData.footerText is not empty.
     if (!flippingText) {
       return CustomText(
         text: widget.cardData.footerText ?? "AUTOPAY IN 3 DAYS",
@@ -48,77 +49,51 @@ class _BillCardFooterTextState extends State<BillCardFooterText> {
         color: const Color.fromARGB(255, 57, 177, 123),
         weight: FontWeight.bold,
       );
-    } else {
-      // Else, flip between texts in flipper config.
-      if (currentIndex != -1) {
-        // For non flinal states
-        currentText = flipperData!.items[currentIndex].text;
-      }
+    }
 
-      return AnimatedSwitcher(
-        duration: const Duration(milliseconds: 500),
-        switchInCurve: Curves.easeInCirc,
-        switchOutCurve: Curves.easeInCirc,
-        transitionBuilder: (child, animation) {
-          final inAnimation = Tween<Offset>(
-            begin: const Offset(0, 0.6),
-            end: Offset.zero,
-          ).animate(animation);
+    // Else, flip between texts in flipper config.
+    final provider = context.watch<FlipperSyncProvider>();
+    final index = provider.currentIndex % flipperData!.items.length;
+    final currentText = flipperData!.items[index].text;
 
-          final outAnimation = Tween<Offset>(
-            begin: Offset.zero,
-            end: const Offset(0, -0.10),
-          ).animate(animation);
+    return AnimatedSwitcher(
+      duration: const Duration(milliseconds: 500),
+      switchInCurve: Curves.easeInCirc,
+      switchOutCurve: Curves.easeInCirc,
+      transitionBuilder: (child, animation) {
+        final inAnimation = Tween<Offset>(
+          begin: const Offset(0, 0.6),
+          end: Offset.zero,
+        ).animate(animation);
 
-          final isNewChild = child.key == ValueKey(currentText);
+        final outAnimation = Tween<Offset>(
+          begin: Offset.zero,
+          end: const Offset(0, -0.10),
+        ).animate(animation);
 
-          return SlideTransition(
-            position: isNewChild ? inAnimation : outAnimation,
-            child: FadeTransition(opacity: animation, child: child),
-          );
-        },
-        child: Align(
-          key: ValueKey(currentText),
-          alignment: Alignment.center,
-          child: ConstrainedBox(
-            constraints: BoxConstraints(maxWidth: context.width * 0.25),
-            child: CustomText(
-              key: ValueKey(currentText),
-              text: currentText,
-              size: 10,
-              maxLines: 2,
-              color: const Color.fromARGB(255, 57, 177, 123),
-              weight: FontWeight.bold,
-              alignment: TextAlign.center,
-            ),
+        final isNewChild = child.key == ValueKey(currentText);
+
+        return SlideTransition(
+          position: isNewChild ? inAnimation : outAnimation,
+          child: FadeTransition(opacity: animation, child: child),
+        );
+      },
+      child: Align(
+        key: ValueKey(currentText),
+        alignment: Alignment.center,
+        child: ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: context.width * 0.25),
+          child: CustomText(
+            key: ValueKey(currentText),
+            text: currentText,
+            size: 10,
+            maxLines: 2,
+            color: const Color.fromARGB(255, 57, 177, 123),
+            weight: FontWeight.bold,
+            alignment: TextAlign.center,
           ),
         ),
-      );
-    }
-  }
-
-  void _startFlipping() {
-    final delay = Duration(milliseconds: flipperData?.flipDelay ?? 2000);
-    final maxFlips = flipperData?.flipCount ?? 0;
-
-    _timer = Timer.periodic(delay, (timer) {
-      setState(() {
-        currentIndex = (currentIndex + 1) % flipperData!.items.length;
-        completedFlips++;
-        if (maxFlips > 0 && completedFlips >= maxFlips) {
-          _timer?.cancel();
-          currentIndex = -1;
-          if (flipperData?.finalStage.text != null) {
-            currentText = flipperData?.finalStage.text as String;
-          }
-        }
-      });
-    });
-  }
-
-  @override
-  void dispose() {
-    _timer?.cancel();
-    super.dispose();
+      ),
+    );
   }
 }
