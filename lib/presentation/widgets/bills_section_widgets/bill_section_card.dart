@@ -1,3 +1,4 @@
+import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/bills_section_widgets/bill_card_widgets/bill_card_title_with_subtitle.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -35,22 +36,9 @@ class BillSectionCard extends StatelessWidget {
           children: [
             BillCardLogo(logoData: cardData.logo),
             const Gap(15),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CustomText(
-                  text: cardData.title,
-                  size: 20,
-                  weight: FontWeight.w800,
-                ),
-                CustomText(
-                  text: cardData.subTitle,
-                  size: 16,
-                  color: const Color.fromARGB(255, 130, 130, 130),
-                  weight: FontWeight.w500,
-                ),
-              ],
+            BillCardTitleWithSubtitle(
+              title: cardData.title,
+              subTitle: cardData.subTitle,
             ),
             const Spacer(),
             BillCardPaymentButtonWithStatus(cardData: cardData),

@@ -22,7 +22,8 @@ class _BillCardButtonState extends State<BillCardButton> {
         border: Border.all(color: Colors.black, width: 1.3),
         borderRadius: const BorderRadius.all(Radius.circular(5)),
       ),
-      child: Center(
+      child: FittedBox(
+        fit: BoxFit.scaleDown,
         child: CustomText(
           text: "Pay ${widget.cardData.paymentAmount}",
           color: Colors.white,
