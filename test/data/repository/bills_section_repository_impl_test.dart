@@ -10,12 +10,14 @@ import 'bills_section_repository_impl_test.mocks.dart';
 
 @GenerateMocks([BillsSectionDataSource])
 void main() {
-  late BillsSectionRepositoryImpl repository;
+  late RemoteBillsSectionRepositoryImpl repository;
   late MockBillsSectionDataSource mockDataSource;
 
   setUp(() {
     mockDataSource = MockBillsSectionDataSource();
-    repository = BillsSectionRepositoryImpl(remoteDataSource: mockDataSource);
+    repository = RemoteBillsSectionRepositoryImpl(
+      remoteDataSource: mockDataSource,
+    );
   });
 
   group('BillsSectionRepositoryImpl', () {
