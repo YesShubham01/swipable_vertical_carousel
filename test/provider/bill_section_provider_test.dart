@@ -2,12 +2,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:cred_assignment_by_shubham_puhal/provider/bill_section_provider.dart';
-import 'package:cred_assignment_by_shubham_puhal/data/repository/bills_section_repository_impl.dart';
+import 'package:cred_assignment_by_shubham_puhal/data/repository/remote_bills_section_repository_impl.dart';
 import 'package:cred_assignment_by_shubham_puhal/data/models/section_model.dart';
 
 import 'bill_section_provider_test.mocks.dart';
 
-@GenerateMocks([BillsSectionRepositoryImpl])
+@GenerateMocks([RemoteBillsSectionRepositoryImpl])
 void main() {
   late BillsSectionProvider provider;
   late MockBillsSectionRepositoryImpl mockRepository;

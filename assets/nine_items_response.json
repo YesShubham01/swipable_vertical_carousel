@@ -1,0 +1,52 @@
+{
+    "entity_type": "section",
+    "external_id": "section_ab18b286-ff33-4072-992d-f3727c6809ff:ab18b286-ff33-4072-992d-f3727c6809ff",
+    "template_name": "your_bills_section_horizontal",
+    "template_properties": {
+        "body": {
+            "auto_scroll_enabled": true,
+            "badge": {
+                "cta": {
+                    "type": "deeplink"
+                },
+                "icon": "https://assets.dreamplug.in/octapaul/heartbeat/de0d37b0a85811edb942dd1d2dcae4c2.png"
+            },
+            "bills_count": 9,
+            "cards_animation_config": {
+                "count": 10,
+                "delay": 3,
+                "duration": "0.7"
+            },
+            "orientation": "vertical",
+            "template_type": "your_bills_section_horizontal",
+            "title": "UPCOMING BILLS"
+        },
+        "child_list": [
+            {
+                "entity_type": "card",
+                "external_id": "card_1839f4a6-0e4c-4dc3-9fcf-f85234cba40a:ed426f09-1f2b-4ddd-988e-233787accce4",
+                "template_name": "your_bills_card_vertical",
+                "template_properties": {
+                    "background": {
+                        "color": {
+                            "colors": [
+                                "#FFFFFF"
+                            ],
+                            "direction": " TopLeft_BottomRight"
+                        }
+                    },
+                    "body": {
+                        "cashback_text": "GET 1% BACK AS GOLD UPTO ₹200",
+                        "expiring_text": "₹%s expiring soon",
+                        "footer_text": "OVERDUE",
+                        "logo": {
+                            "bg_color": "#ffffff",
+                            "shape": "rectangle",
+                            "url": "https://dg1qgqhnfu4m2.cloudfront.net/heartbeat/53ce56e0a12b11ec9ffdcf8085fda1bd.png"
+                        }
+                    }
+                }
+            }
+        ]
+    }
+}

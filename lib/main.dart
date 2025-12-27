@@ -1,3 +1,4 @@
+import 'package:cred_assignment_by_shubham_puhal/data/repository/asset_bills_section_repository_impl.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,7 +19,9 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => BillsSectionProvider()..fetchBills(),
+          create: (_) => BillsSectionProvider(
+            repository: AssetBillsSectionRepositoryImpl(),
+          )..fetchBills(),
         ),
         ChangeNotifierProvider(create: (_) => ControllerProvider()),
         ChangeNotifierProvider(create: (_) => FlipperSyncProvider()),

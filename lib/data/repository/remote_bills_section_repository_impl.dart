@@ -1,16 +1,12 @@
 import 'package:cred_assignment_by_shubham_puhal/data/data_sources/bills_section_data_source.dart';
 import 'package:cred_assignment_by_shubham_puhal/data/models/section_model.dart';
-
-/// Abstract contract for the repository
-abstract class BillsSectionRepository {
-  Future<SectionModel> getBillsSection({required String url});
-}
+import 'package:cred_assignment_by_shubham_puhal/data/repository/bills_section_repository.dart';
 
 /// Implementation of [BillsSectionRepository].
-class BillsSectionRepositoryImpl implements BillsSectionRepository {
+class RemoteBillsSectionRepositoryImpl implements BillsSectionRepository {
   final BillsSectionDataSource remoteDataSource;
 
-  BillsSectionRepositoryImpl({required this.remoteDataSource});
+  RemoteBillsSectionRepositoryImpl({required this.remoteDataSource});
 
   @override
   Future<SectionModel> getBillsSection({required String url}) async {

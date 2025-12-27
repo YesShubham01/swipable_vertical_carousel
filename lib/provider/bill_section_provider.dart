@@ -1,16 +1,17 @@
 import 'package:cred_assignment_by_shubham_puhal/core/constants/api_endpoints.dart';
-import 'package:cred_assignment_by_shubham_puhal/data/repository/bills_section_repository_impl.dart';
+import 'package:cred_assignment_by_shubham_puhal/data/repository/bills_section_repository.dart';
+import 'package:cred_assignment_by_shubham_puhal/data/repository/remote_bills_section_repository_impl.dart';
 import 'package:flutter/foundation.dart';
 import 'package:cred_assignment_by_shubham_puhal/data/models/section_model.dart';
 import 'package:cred_assignment_by_shubham_puhal/data/data_sources/bills_section_data_source.dart';
 import 'package:http/http.dart' as http;
 
 class BillsSectionProvider extends ChangeNotifier {
-  final BillsSectionRepositoryImpl _repository;
-  BillsSectionProvider({BillsSectionRepositoryImpl? repository})
+  final BillsSectionRepository _repository;
+  BillsSectionProvider({BillsSectionRepository? repository})
     : _repository =
           repository ??
-          BillsSectionRepositoryImpl(
+          RemoteBillsSectionRepositoryImpl(
             remoteDataSource: BillsSectionRemoteDataSource(http.Client()),
           );
 

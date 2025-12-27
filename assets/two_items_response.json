@@ -1,0 +1,54 @@
+{
+    "entity_type": "section",
+    "external_id": "section_ab18b286-ff33-4072-992d-f3727c6809ff:ab18b286-ff33-4072-992d-f3727c6809ff",
+    "template_name": "your_bills_section_horizontal",
+    "template_properties": {
+        "body": {
+            "auto_scroll_enabled": true,
+            "badge": {
+                "cta": {
+                    "type": "deeplink"
+                },
+                "icon": "https://assets.dreamplug.in/octapaul/heartbeat/de0d37b0a85811edb942dd1d2dcae4c2.png"
+            },
+            "bills_count": 2,
+            "cards_animation_config": {
+                "count": 10,
+                "delay": 3,
+                "duration": "0.7"
+            },
+            "orientation": "vertical",
+            "template_type": "your_bills_section_horizontal",
+            "title": "UPCOMING BILLS"
+        },
+        "child_list": [
+            {
+                "entity_type": "card",
+                "external_id": "card_1839f4a6-0e4c-4dc3-9fcf-f85234cba40a:mobile_postpaid_8ff9f248-4001-44ce-8529-147dd589dc5f",
+                "template_name": "your_bills_card_vertical",
+                "template_properties": {
+                    "background": {
+                        "asset": {
+                            "type": "image",
+                            "url": "https://d1sofudel0ufia.cloudfront.net/fabrik/nba/0424f010a50211ecab1fc5eccc1abf56.png"
+                        },
+                        "color": {
+                            "colors": [
+                                "#FFFFFF"
+                            ],
+                            "direction": " TopLeft_BottomRight"
+                        }
+                    },
+                    "body": {
+                        "footer_text": "due today",
+                        "logo": {
+                            "bg_color": "#ffffff",
+                            "shape": "rectangle",
+                            "url": "https://d23irbddtnqndj.cloudfront"
+                        }
+                    }
+                }
+            }
+        ]
+    }
+}

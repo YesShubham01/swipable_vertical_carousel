@@ -9,7 +9,7 @@ import 'package:cred_assignment_by_shubham_puhal/data/data_sources/bills_section
     as _i2;
 import 'package:cred_assignment_by_shubham_puhal/data/models/section_model.dart'
     as _i3;
-import 'package:cred_assignment_by_shubham_puhal/data/repository/bills_section_repository_impl.dart'
+import 'package:cred_assignment_by_shubham_puhal/data/repository/remote_bills_section_repository_impl.dart'
     as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 
@@ -43,7 +43,7 @@ class _FakeSectionModel_1 extends _i1.SmartFake implements _i3.SectionModel {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockBillsSectionRepositoryImpl extends _i1.Mock
-    implements _i4.BillsSectionRepositoryImpl {
+    implements _i4.RemoteBillsSectionRepositoryImpl {
   MockBillsSectionRepositoryImpl() {
     _i1.throwOnMissingStub(this);
   }

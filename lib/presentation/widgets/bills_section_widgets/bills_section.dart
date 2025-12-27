@@ -1,3 +1,4 @@
+import 'package:cred_assignment_by_shubham_puhal/presentation/widgets/customised_widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:gap/gap.dart';
@@ -33,12 +34,23 @@ class BillsSectionState extends State<BillsSection> {
     }
 
     if (provider.error != null) {
-      return Center(child: Text('Error: ${provider.error}'));
+      return const Center(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 30),
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: CustomText(
+              text: 'Please check your Internet Connection.',
+              color: Colors.red,
+            ),
+          ),
+        ),
+      );
     }
 
     SectionModel? sectionData = provider.billsSection;
     if (sectionData == null) {
-      return const Center(child: Text('No data available'));
+      return const Center(child: CustomText(text: 'No data available'));
     }
 
     final sectionBody = sectionData.templateProperties.body;

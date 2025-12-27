@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:cred_assignment_by_shubham_puhal/data/repository/bills_section_repository_impl.dart';
+import 'package:cred_assignment_by_shubham_puhal/data/repository/remote_bills_section_repository_impl.dart';
 import 'package:cred_assignment_by_shubham_puhal/data/data_sources/bills_section_data_source.dart';
 import 'package:cred_assignment_by_shubham_puhal/data/models/section_model.dart';
 
